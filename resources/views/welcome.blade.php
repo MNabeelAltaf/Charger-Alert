@@ -104,7 +104,7 @@
 
 <body>
     <div class="wrapper">
-        <h1>coming soon<span class="dot">.</span></h1>
+        <h1>coming soon<span class="dot">...</span></h1>
         <br>
         <p>______________________________</p>
         <br>
