@@ -65,57 +65,84 @@
 
     <section class="relative pt-28 md:pb-24 pb-16">
         <div class="container">
-            <div class="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1 gap-[30px]">
-                <div class="lg:col-span-5">
-                    <p class="mb-6">Thumbnail</p>
-                    <img src="{{ $thumb }}" class="rounded-md shadow dark:shadow-gray-700" alt="">
-                </div>
-
-                <div class="lg:col-span-7 lg:ms-8">
-                    <h5 class="md:text-2xl text-xl font-semibold">{{ $resource->name }}</h5>
-
+            <div class="grid grid-cols-12 gap-6">
+                <!-- Main Content: col-span-12 for full-width -->
+                <div class="col-span-12">
+                    <h5 class="md:text-2xl text-xl font-semibold text-center">{{ $resource->name }}</h5>
+                    <br>
+                    <br>
                     <span class="font-medium text-slate-400 block mt-2">Category:
-                        <a href="creator-profile.html" class="text-violet-600">{{ $category->name }}
-                        </a>
+                        <a href="#" class="text-violet-600">{{ $category->name }}</a>
                     </span>
                     <span class="font-medium text-slate-400 block mt-2">Animation type:
-                        <a href="creator-profile.html" class="text-violet-600">{{ $resource->animation_type }}
-                        </a>
+                        <a href="#" class="text-violet-600">{{ $resource->animation_type }}</a>
                     </span>
 
-                    <p class="text-slate-400 mt-4">
+                    <!-- Two Columns for Video and Thumbnail -->
 
-                    <div class="bg-gray-50 dark:bg-slate-800 rounded-md shadow dark:shadow-gray-800 mt-[30px] p-6">
 
-                        @if ($extension != 'json')
-                            <video src="{{ $anim }}"
-                                class="rounded-md shadow dark:shadow-gray-700 w-full h-auto" controls>
-                                Your browser does not support the video tag.
-                            </video>
-                        @else
-                            <div id="lottie-animation" style="width: 500px; height: 500px;"></div>
-                        @endif
+                    <div class="grid grid-cols-12 gap-6 mt-16">
+                        <!-- Video Section: col-span-6 -->
+                        <div class="col-span-12 lg:col-span-6">
+                            <p class="mb-4">Animation</p>
+                            <div
+                                class="bg-gray-50 dark:bg-slate-800 rounded-md shadow dark:shadow-gray-800 p-4 h-64 flex justify-center items-center">
+                                @if ($extension != 'json')
+                                    <video src="{{ $anim }}"
+                                        class="rounded-md shadow dark:shadow-gray-700 w-64 h-64 object-cover" controls>
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <div id="lottie-animation" style="width: 256px; height: 256px;"></div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Thumbnail Section: col-span-6 -->
+                        <div class="col-span-12 lg:col-span-6">
+                            <p class="mb-4">Thumbnail</p>
+                            <div
+                                class="bg-gray-50 dark:bg-slate-800 rounded-md shadow dark:shadow-gray-800 p-4 h-64 flex justify-center items-center">
+                                <img src="{{ $thumb }}"
+                                    class="rounded-md shadow dark:shadow-gray-700 w-64 h-64 object-cover"
+                                    alt="Thumbnail">
+                            </div>
+                        </div>
                     </div>
-                    </p>
+                    <br>
 
 
+                    <!-- Buttons Section -->
 
-                    <div class="mt-6">
+                    <div class="mt-6 flex justify-start items-center space-x-4">
+                        <!-- Edit Button -->
+                        {{-- <div class="p-4 bg-gray-50 dark:bg-slate-900 rounded-md">
+                            <form action="{{ route('edit_item', ['item_id' => $resource->id]) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit"
+                                    class="btn rounded-full bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white">
+                                    Edit
+                                </button>
+                            </form>
+                        </div> --}}
+                        &nbsp;
+                        &nbsp;
 
+                        <!-- Delete Button -->
                         <button type="button" data-modal-toggle="deleteConfirmationModal"
                             class="btn rounded-full bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white">
                             <i class="mdi mdi-bin"></i> Delete
                         </button>
-
-                        {{-- <a href="javascript:void(0)" data-modal-toggle="NftBuynow"
-                            class="btn rounded-full bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white"><i
-                                class="mdi mdi-lightning-bolt"></i> Buy Now</a> --}}
                     </div>
+
+
 
 
 
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -144,7 +171,7 @@
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            path:  @json($anim)
+            path: @json($anim)
         });
     </script>
     <!-- JAVASCRIPTS -->

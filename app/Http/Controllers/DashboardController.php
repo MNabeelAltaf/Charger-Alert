@@ -12,21 +12,46 @@ class DashboardController extends Controller
 {
     public function index()
     {
+
         // Get all resources
-        $resources = Resource::all();
-        $baseUrl = url('storage');
-        $videoExtensions = ['mp4', 'avi', 'mov', 'flv', 'webm'];
-        $resourcesWithDetails = $resources->map(function ($resource) use ($baseUrl, $videoExtensions) {
-            $resource->path = $baseUrl . '/' . $resource->path; // Append base URL to the path
-            $resource->thumbnail = $baseUrl . '/' . $resource->thumbnail; // Append base URL to the path
-            $resource->isVideo = in_array(pathinfo($resource->path, PATHINFO_EXTENSION), $videoExtensions);
-            return $resource;
-        });
+        // $resources = Resource::all();
+        // $baseUrl = url('storage');
+        // $videoExtensions = ['mp4', 'avi', 'mov', 'flv', 'webm'];
+        // $resourcesWithDetails = $resources->map(function ($resource) use ($baseUrl, $videoExtensions) {
+        //     $resource->path = $baseUrl . '/' . $resource->path; // Append base URL to the path
+        //     $resource->thumbnail = $baseUrl . '/' . $resource->thumbnail; // Append base URL to the path
+        //     $resource->isVideo = in_array(pathinfo($resource->path, PATHINFO_EXTENSION), $videoExtensions);
+        //     return $resource;
+        // });
+        // return view('dashboard', compact('resourcesWithDetails'));
 
- 
 
-        return view('dashboard', compact('resourcesWithDetails'));
+        $all_categories = Category::get();
+
+        return view('dashboard', compact('all_categories'));
     }
+
+    public function view_category_animations(Request $request)
+    {
+
+        $categoryID = $request->category_id;
+
+        $category = Category::find($categoryID);
+
+        if ($category) {
+            $categoryName = $category->name;
+        } else {
+
+            return back()->with('error', 'Category not found.');
+        }
+
+        $animations = Resource::where('category_id', $categoryID)->get();
+
+        return view('view_all_animations', ['animations' => $animations, 'category_name' => $categoryName]);
+    }
+
+
+
     public function create_anim(Request $request)
     {
 
@@ -112,6 +137,8 @@ class DashboardController extends Controller
     public function edit_animation(Request $request)
     {
 
+        dd("to be implemented");
+
         $animation_id = $request->item_id;
 
         $resource = Resource::where('id', $animation_id)->first();
@@ -162,27 +189,66 @@ class DashboardController extends Controller
         return back()->with('success', 'Animation data updated successfully.');
     }
 
+    public function edit_category_view(Request $request)
+    {
+
+        dd("to be implemented");
+
+        $cat_id = $request->category_id;
+
+        $category_data = Category::where('id', $cat_id)->first();
+
+        return view('edit_category', ['category_data' => $category_data]);
+    }
+
+    public function edit_category(Request $request)
+    {
+        $cat_name = $request->name;
+        $cat_thumb = $request->thumb;
+
+        dd($cat_name, $cat_thumb);
+
+    }
+
 
     public function category_view()
     {
-        return  view('category');
+
+        $all_categories = Category::all();
+        return  view('category', compact('all_categories'));
     }
 
     public function add_category(Request $request)
     {
-
         $request->validate([
-            'category' => 'required|string|max:255', // Adjust rules as necessary
+            'category' => 'required|string|max:255',
+            'thumbnail' => 'required|file|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
         $category_name = $request->category;
 
-        Category::create(['name' => $category_name]);
+        $category_name_lower = strtolower($category_name);
 
+        $existingCategory = Category::whereRaw('LOWER(name) = ?', [$category_name_lower])->first();
 
-        // return redirect()->route('category_view')->with('success', 'Category has added');
-        return back()->with('success', 'Category has added');
+        if ($existingCategory) {
+            return back()->with('error', 'Category already exists.');
+        }
+
+        $thumbnailPath = null;
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailPath = $request->file('thumbnail')->store('category_thumbnails', 'public');
+        }
+
+        Category::create([
+            'name' => $category_name,
+            'thumb' => $thumbnailPath ?  $thumbnailPath : null
+        ]);
+
+        return back()->with('success', 'Category has been added');
     }
+
 
 
     public function delete_anim(Request $request)

@@ -22,38 +22,25 @@
         <div class="container">
 
             <div class="flex flex-col items-center">
-                <h3 class="md:text-[30px] text-[26px] font-semibold text-center">Discover Items</h3>
-                <div class="w-full flex justify-end">
-                    <p class="text-right">
-                        <a href="{{ route('add_new_animation') }}"
-                            class="btn bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full">
-                            Add New Animation
-                        </a>
-                    </p>
-                </div>
+                <h3 class="md:text-[30px] text-[26px] font-semibold text-center">{{ $category_name }} <br> Animations
+                </h3>
             </div>
-
-            <br>
-
-            <br>
-            <div class="flex flex-col items-center">
-                <h3>Categories</h3>
-            </div>
-            <br>
-
-            <br>
-
 
             <!--end grid-->
-            {{-- all categories --}}
+            {{-- all animations --}}
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
-                @foreach ($all_categories as $categories)
+
+                {{-- {{ dd($animations) }} --}}
+
+                @foreach ($animations as $anim)
                     <div
                         class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 h-80 flex flex-col">
 
-                        <a href="{{ route('category_animations', ['category_id' => $categories->id]) }}">
+                        <a href="{{ route('view_animation', ['animation_id' => $anim->id]) }}">
+
                             <div class="relative flex-grow overflow-hidden h-4/5">
-                                <img src="{{ url('storage') . '/' . $categories->thumb }}"
+
+                                <img src="{{ url('storage') . '/' . $anim->thumbnail }}"
                                     class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full w-full object-cover"
                                     alt="">
                             </div>
@@ -62,13 +49,14 @@
                             <div class="flex-none h-1/5 mt-2">
                                 <div class="my-3">
                                     <a href="#" class="font-semibold hover:text-violet-600">
-                                        {{ $categories->name }}
+                                        {{ $anim->name }}
                                     </a>
                                 </div>
                             </div>
                         </a>
                     </div>
                 @endforeach
+
             </div>
             <!--end grid-->
 
