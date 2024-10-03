@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteEngine On 
+    RewriteRule ^$ public/index.php [L]
+    RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Set the default charset
+AddDefaultCharset UTF-8
+
+# Disable file caching for PHP scripts
+<FilesMatch "\.php$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+</FilesMatch>
+
+# Handle CORS headers if necessary (uncomment if you need it)
+# Header set Access-Control-Allow-Origin "*"
+# Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+# Header set Access-Control-Allow-Headers "Content-Type, Authorization"
