@@ -137,8 +137,6 @@ class DashboardController extends Controller
     public function edit_animation(Request $request)
     {
 
-        dd("to be implemented");
-
         $animation_id = $request->item_id;
 
         $resource = Resource::where('id', $animation_id)->first();
@@ -148,11 +146,8 @@ class DashboardController extends Controller
         // already saved category
         $category = Category::where('id', $category_id)->first();
 
-
         // all categories in table
         $categories = Category::all();
-
-
 
         return view('edit-animation', compact('resource', 'category', 'categories'));
     }
@@ -160,9 +155,8 @@ class DashboardController extends Controller
     public function edit_animation_data(Request $request)
     {
 
-        dd("remaining...");
+        $animation_id = $request->item_id;
 
-        $animation_id = $request->item_id; // Ensure this value is passed from the form
         $resource = Resource::findOrFail($animation_id);
 
         // Update resource properties
@@ -172,42 +166,58 @@ class DashboardController extends Controller
 
         // Handle thumbnail file upload
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+            $thumbnailPath = $request->file('thumbnail')->store('thumbnail', 'public');
             $resource->thumbnail = $thumbnailPath;
         }
 
         // Handle animation file upload
         if ($request->hasFile('path')) {
-            $animationPath = $request->file('path')->store('animations', 'public');
+            $uploadedFile = $request->file('path');
+            $extension = $uploadedFile->getClientOriginalExtension();
+            $animationPath = $uploadedFile->storeAs('resources', uniqid() . '.' . $extension, 'public');
             $resource->path = $animationPath;
         }
 
-        // Save the updated resource
+
         $resource->save();
 
-        // Redirect with a success message
-        return back()->with('success', 'Animation data updated successfully.');
+
+        return redirect()->route('view_animation', ['animation_id' => $animation_id])->with('success', 'Animation data updated successfully.');
     }
 
     public function edit_category_view(Request $request)
     {
 
-        dd("to be implemented");
-
         $cat_id = $request->category_id;
 
         $category_data = Category::where('id', $cat_id)->first();
+
 
         return view('edit_category', ['category_data' => $category_data]);
     }
 
     public function edit_category(Request $request)
     {
-        $cat_name = $request->name;
-        $cat_thumb = $request->thumb;
 
-        dd($cat_name, $cat_thumb);
+        // Validate the request
+        $request->validate([
+            'category_id' => 'required|integer|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
+        $category = Category::findOrFail($request->category_id);
+
+        $category->name = $request->name;
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailPath = $request->file('thumbnail')->store('category_thumbnails', 'public');
+            $category->thumb = $thumbnailPath;
+        }
+
+        $category->save();
+
+        return redirect()->back()->with('success', 'Category updated successfully!');
     }
 
 

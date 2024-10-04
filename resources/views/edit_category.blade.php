@@ -41,8 +41,8 @@
                         <br>
                         <div class="">
 
-                            <form action="{{ route('edit_category_data') }}" method="POST" enctype="multipart/form-data"
-                                class="py-6">
+                            <form action="{{ route('edit_category_data') }}" method="POST"
+                                enctype="multipart/form-data" class="py-6">
 
                                 @method('PUT')
 
@@ -60,13 +60,35 @@
                                     <br>
 
 
+                                    {{-- <div class="flex items-center space-x-3">
+                                        <label class="form-label font-medium">Thumbnail<span
+                                                class="text-red-600">*</span></label>
+                                        <input type="file" id="input-file2" name="thumbnail" accept="image/*"
+                                            value="{{ $category_data->thumb }}"
+                                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-400 transition duration-200 ease-in-out file:bg-gray-200 file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer file:hover:bg-gray-300 dark:file:bg-gray-700 dark:file:hover:bg-gray-600">
+                                    </div>
+
+
+                                    <div class="flex items-center space-x-3 my-10" style="height: 140px;">
+                                        <img src="{{ $thumb }}" alt="category thumbnail"
+                                            style="height: 140px; width: 140px;">
+                                    </div> --}}
+
+
+
                                     <div class="flex items-center space-x-3">
                                         <label class="form-label font-medium">Thumbnail<span
                                                 class="text-red-600">*</span></label>
                                         <input type="file" id="input-file2" name="thumbnail" accept="image/*"
-                                            value="{{ $thumb }}"
                                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-400 transition duration-200 ease-in-out file:bg-gray-200 file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer file:hover:bg-gray-300 dark:file:bg-gray-700 dark:file:hover:bg-gray-600">
                                     </div>
+
+                                    <div class="flex items-center space-x-3 my-10" style="height: 140px;">
+                                        <img id="image-preview" src="{{ $thumb }}" alt="category thumbnail"
+                                            style="height: 140px; width: 140px;">
+                                    </div>
+
+                                    <input name="category_id" type="hidden" value={{ $category_data->id }} />
 
                                     <input type="submit" id="submit" name="send"
                                         class="btn bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full mt-5"
@@ -95,6 +117,23 @@
 
     <!-- JAVASCRIPTS -->
     @include('components.JSFiles')
+
+    <script>
+        const fileInput = document.getElementById('input-file2');
+        const imagePreview = document.getElementById('image-preview');
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
     <!-- JAVASCRIPTS -->
 </body>
 

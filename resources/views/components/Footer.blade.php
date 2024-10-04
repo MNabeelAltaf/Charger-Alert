@@ -6,8 +6,9 @@
                     <p class="mb-0 text-gray-300">©
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> Giglink. Design with <i class="mdi mdi-heart text-red-600"></i> by
-                        <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.
+                        </script> Charger Alert <i class="mdi mdi-heart text-red-600"></i> by
+                        {{-- <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>. --}}
+                        <a href="{{ route('dashboard') }}" target="_blank" class="text-reset">Mobipixels</a>.
                     </p>
                 </div>
             </div>

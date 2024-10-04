@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/create_anim', [DashboardController::class, 'create_anim'])->name('create_anim');
     Route::get('/view-animation', [DashboardController::class, 'view_anim'])->name('view_animation');
+
     Route::put('/edit-item', [DashboardController::class, 'edit_animation'])->name('edit_item');
     Route::put('/edit-animation', [DashboardController::class, 'edit_animation_data'])->name('edit_animation');
 

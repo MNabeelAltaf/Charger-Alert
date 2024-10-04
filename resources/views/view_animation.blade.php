@@ -113,10 +113,9 @@
 
 
                     <!-- Buttons Section -->
-
                     <div class="mt-6 flex justify-start items-center space-x-4">
                         <!-- Edit Button -->
-                        {{-- <div class="p-4 bg-gray-50 dark:bg-slate-900 rounded-md">
+                        <div class="p-4 bg-gray-50 dark:bg-slate-900 rounded-md">
                             <form action="{{ route('edit_item', ['item_id' => $resource->id]) }}" method="POST">
                                 @csrf
                                 @method('PUT')
@@ -125,7 +124,7 @@
                                     Edit
                                 </button>
                             </form>
-                        </div> --}}
+                        </div>
                         &nbsp;
                         &nbsp;
 
@@ -135,11 +134,6 @@
                             <i class="mdi mdi-bin"></i> Delete
                         </button>
                     </div>
-
-
-
-
-
                 </div>
             </div>
 

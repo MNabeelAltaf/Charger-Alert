@@ -1,7 +1,7 @@
 <nav id="topnav" class="defaultscroll is-sticky">
     <div class="container">
         <!-- Logo container-->
-        <a class="logo ps-0" href="index.html">
+        <a class="logo ps-0" href="{{ route('dashboard') }}">
             <img src="{{ asset('assets/images/logo-dark.png') }}" class="inline-block sm:hidden" alt="">
             <div class="sm:block hidden">
                 <span class="inline-block dark:hidden">
@@ -51,9 +51,9 @@
 
                     <ul class="py-2 text-start">
                         <li>
-                            <a href="creator-profile.html"
+                            {{-- <a href="creator-profile.html"
                                 class="block text-[14px] font-semibold py-1.5 px-4 hover:text-violet-600"><i
-                                    class="uil uil-user text-[16px] align-middle me-1"></i> Profile</a>
+                                    class="uil uil-user text-[16px] align-middle me-1"></i> Profile</a> --}}
                         </li>
                         {{-- <li>
                             <a href="creator-profile-edit.html" class="block text-[14px] font-semibold py-1.5 px-4 hover:text-violet-600"><i class="uil uil-setting text-[16px] align-middle me-1"></i> Settings</a>
