@@ -48,7 +48,8 @@ class ResourceController extends Controller
             return [
                 'category' => $categoryName, // Use category name here
                 'category_id' => $animations[0]['category_id'], // Access category_id from the first animation
-                'animations' => $animations->toArray() // Animations array
+                // 'animations' => $animations->toArray() // Animations array
+                'animations' => $animations->shuffle()->toArray() // Animations array
             ];
         })->values();
 
