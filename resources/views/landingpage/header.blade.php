@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="assets/images/icon.ico">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
     <!-- Css -->
     <link href="assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">

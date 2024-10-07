@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="dark scroll-smooth" dir="ltr">
 
+<link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
 
 <body class="font-urbanist text-base text-black dark:text-white dark:bg-slate-900">

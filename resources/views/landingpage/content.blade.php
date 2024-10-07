@@ -101,15 +101,6 @@
                             <p class="text-lg max-w-xl">
                                 Apply animations on the charging screen of the app and make mobile charging appealing.
                             </p>
-
-                            <div class="mt-6">
-                                <a href="explore-two.html"
-                                    class="btn bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full me-2 mt-2">Explore
-                                    Now</a>
-                                <a href="upload-work.html"
-                                    class="btn bg-transparent hover:bg-violet-600 border-violet-600 text-violet-600 hover:text-white rounded-full mt-2">Sell
-                                    Now</a>
-                            </div>
                         </div>
                         <div
                             class="overflow-hidden after:content-[''] after:absolute after:h-10 after:w-10 after:bg-violet-600/10 dark:after:bg-violet-600/30 after:-bottom-[50px] after:start-[30%] after:-z-1 after:rounded-full after:animate-ping">
