@@ -78,6 +78,9 @@
     #lottie-animation {
         transition: opacity 0.5s ease;
     }
+    .loader-border {
+    border-top-color: transparent; /* Makes the top part of the loader transparent for a spinning effect */
+}
 </style>
 
 <section class="relative lg:pt-24 pt-[74px] overflow-hidden">
@@ -120,9 +123,17 @@
                                         id="animation-link">
                                         <div id="lottie-animation"
                                             class="rounded-lg h-64 flex items-center justify-center overflow-hidden transition-opacity duration-500">
+                                            <!-- Loader -->
+                                            <div id="loader"
+                                                class="absolute inset-0 flex items-center justify-center bg-white dark:bg-slate-900 opacity-0">
+                                                <div
+                                                    class="loader-border animate-spin rounded-full border-4 border-t-4 border-blue-500 h-12 w-12">
+                                                </div>
+                                            </div>
                                         </div>
                                     </a>
                                 </div>
+
 
                             </div>
                         </div>
@@ -178,7 +189,6 @@
 
 {{-- lottie  --}}
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
 <script>
     const animations = [
@@ -190,17 +200,21 @@
 
     let currentAnimationIndex = 0;
     let animationInstance = null;
+    const loader = document.getElementById('loader');
 
     function loadAnimation() {
         const animationContainer = document.getElementById('lottie-animation');
-        animationContainer.style.opacity = 0;
-        setTimeout(() => {
 
+        // Show loader and fade out animation
+        loader.classList.remove('opacity-0');
+        animationContainer.style.opacity = 0;
+
+        setTimeout(() => {
             if (animationInstance) {
                 animationInstance.destroy();
             }
 
-
+            // Load new animation
             animationInstance = lottie.loadAnimation({
                 container: animationContainer,
                 renderer: 'svg',
@@ -209,8 +223,10 @@
                 path: animations[currentAnimationIndex],
             });
 
+            // Fade in new animation and hide loader
             animationContainer.style.opacity = 1;
-        }, 500);
+            loader.classList.add('opacity-0');
+        }, 500); // Match this duration with the CSS transition duration
 
         currentAnimationIndex = (currentAnimationIndex + 1) % animations.length;
         setTimeout(loadAnimation, 5000);
@@ -219,7 +235,6 @@
     document.getElementById('animation-link').addEventListener('click', (event) => {
         event.preventDefault();
     });
-
 
     loadAnimation();
 </script>
