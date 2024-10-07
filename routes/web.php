@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\LandingPage;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingPage::class, 'landing_view'])->name('homepage');
+
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/add_new_animation', [DashboardController::class, 'add_new_animation'])->middleware(['auth', 'verified'])->name('add_new_animation');
 Route::get('/add_animation', [DashboardController::class, 'store'])->middleware(['auth', 'verified'])->name('add_animation');

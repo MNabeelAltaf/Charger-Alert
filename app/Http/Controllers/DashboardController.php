@@ -7,6 +7,8 @@ use Flasher\Toastr\Prime\ToastrInterface;
 use App\Models\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
+
 
 class DashboardController extends Controller
 {
@@ -199,12 +201,16 @@ class DashboardController extends Controller
     public function edit_category(Request $request)
     {
 
-        // Validate the request
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'category_id' => 'required|integer|exists:categories,id',
             'name' => 'required|string|max:255',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with("error","Category thumbnail must be less than 1 MB and Name must not be empty");
+        }
 
         $category = Category::findOrFail($request->category_id);
 
