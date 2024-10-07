@@ -62,9 +62,9 @@
                 </div>
 
                 <div class="mt-3 h-20">
-                    <div class="my-3 h-full">
-                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
-                          Animal
+                    <div class="my-3 h-full text-center py-2">
+                        <a href="#" class="font-semibold hover:text-violet-600">
+                          Cars
                         </a>
                     </div>
                 </div>
@@ -81,9 +81,9 @@
                 </div>
 
                 <div class="mt-3 h-20">
-                    <div class="my-3 h-full">
-                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
-                           Human
+                    <div class="my-3 h-full text-center py-2">
+                        <a href="#" class="font-semibold hover:text-violet-600">
+                          Animal
                         </a>
                     </div>
                 </div>
@@ -100,9 +100,9 @@
                 </div>
 
                 <div class="mt-3 h-20">
-                    <div class="my-3 h-full">
-                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
-                           IT
+                    <div class="my-3 h-full text-center py-2">
+                        <a href="#" class="font-semibold hover:text-violet-600">
+                         People
                         </a>
                     </div>
                 </div>
@@ -119,9 +119,9 @@
                 </div>
 
                 <div class="mt-3 h-20">
-                    <div class="my-3 h-full">
-                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
-                            Cars
+                    <div class="my-3 h-full text-center py-2">
+                        <a href="#" class="font-semibold hover:text-violet-600">
+                            Technology
                         </a>
                     </div>
                 </div>
@@ -137,9 +137,9 @@
                 </div>
 
                 <div class="mt-3 h-20">
-                    <div class="my-3 h-full">
-                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
-                            Emoji
+                    <div class="my-3 h-full text-center py-2">
+                        <a href="#" class="font-semibold hover:text-violet-600">
+                            IT
                         </a>
                     </div>
                 </div>
@@ -155,9 +155,9 @@
                 </div>
 
                 <div class="mt-3 h-20">
-                    <div class="my-3 h-full">
-                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
-                           Tech
+                    <div class="my-3 h-full text-center py-2">
+                        <a href="#" class="font-semibold hover:text-violet-600">
+                          Emoji
                         </a>
                     </div>
                 </div>
@@ -173,8 +173,8 @@
                 </div>
 
                 <div class="mt-3 h-20">
-                    <div class="my-3 h-full">
-                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                    <div class="my-3 h-full text-center py-2">
+                        <a href="#" class="font-semibold hover:text-violet-600">
                            Neon
                         </a>
                     </div>
@@ -191,8 +191,8 @@
                 </div>
 
                 <div class="mt-3 h-20">
-                    <div class="my-3 h-full">
-                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                    <div class="my-3 h-full text-center py-2">
+                        <a href="#" class="font-semibold hover:text-violet-600">
                            Birds
                         </a>
                     </div>
