@@ -40,7 +40,6 @@
                 <h3>Categories</h3>
             </div>
             <br>
-
             <br>
 
 
@@ -52,16 +51,35 @@
                         class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 h-80 flex flex-col">
 
                         <a href="{{ route('category_animations', ['category_id' => $categories->id]) }}">
-                            <div class="relative flex-grow overflow-hidden h-4/5">
-                                <img src="{{ url('storage') . '/' . $categories->thumb }}"
-                                    class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full w-full object-cover"
-                                    alt="">
-                            </div>
 
+                            <div class="relative flex-grow overflow-hidden h-4/5">
+                                @php
+                                    $randomColor = sprintf('#%06X', mt_rand(0, 0xffffff));
+                                    $r = hexdec(substr($randomColor, 1, 2));
+                                    $g = hexdec(substr($randomColor, 3, 2));
+                                    $b = hexdec(substr($randomColor, 5, 2));
+                                    $dullFactor = 0.7;
+                                    $dullR = floor($r * $dullFactor);
+                                    $dullG = floor($g * $dullFactor);
+                                    $dullB = floor($b * $dullFactor);
+                                    $dullColor = sprintf('#%02X%02X%02X', $dullR, $dullG, $dullB);
+                                @endphp
+
+
+                                <div class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full w-full object-cover"
+                                    style="background: linear-gradient(to bottom right, {{ $randomColor }} 30%, {{ $dullColor }} 100%);">
+                                    <div
+                                        class="relative flex-grow overflow-hidden h-[90%] flex items-center justify-center text-white rounded-md">
+                                        <span
+                                            style="height: 15rem; padding:5rem; font-size:4.4rem;">{{ substr($categories->name, 0, 2) }}</span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="flex-none h-1/5 mt-2">
                                 <div class="my-3">
-                                    <a href="#" class="font-semibold hover:text-violet-600">
+                                    <a href="{{ route('category_animations', ['category_id' => $categories->id]) }}"
+                                        class="font-semibold hover:text-violet-600">
                                         {{ $categories->name }}
                                     </a>
                                 </div>

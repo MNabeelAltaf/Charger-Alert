@@ -76,17 +76,17 @@
 
 
 
-                                    <div class="flex items-center space-x-3">
+                                    {{-- <div class="flex items-center space-x-3">
                                         <label class="form-label font-medium">Thumbnail<span
                                                 class="text-red-600">*</span></label>
                                         <input type="file" id="input-file2" name="thumbnail" accept="image/*"
                                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-400 transition duration-200 ease-in-out file:bg-gray-200 file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer file:hover:bg-gray-300 dark:file:bg-gray-700 dark:file:hover:bg-gray-600">
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="flex items-center space-x-3 my-10" style="height: 140px;">
+                                    {{-- <div class="flex items-center space-x-3 my-10" style="height: 140px;">
                                         <img id="image-preview" src="{{ $thumb }}" alt="category thumbnail"
                                             style="height: 140px; width: 140px;">
-                                    </div>
+                                    </div> --}}
 
                                     <input name="category_id" type="hidden" value={{ $category_data->id }} />
 

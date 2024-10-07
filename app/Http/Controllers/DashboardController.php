@@ -204,7 +204,7 @@ class DashboardController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|integer|exists:categories,id',
             'name' => 'required|string|max:255',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -216,10 +216,10 @@ class DashboardController extends Controller
 
         $category->name = $request->name;
 
-        if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('category_thumbnails', 'public');
-            $category->thumb = $thumbnailPath;
-        }
+        // if ($request->hasFile('thumbnail')) {
+        //     $thumbnailPath = $request->file('thumbnail')->store('category_thumbnails', 'public');
+        //     $category->thumb = $thumbnailPath;
+        // }
 
         $category->save();
 
@@ -238,7 +238,7 @@ class DashboardController extends Controller
     {
         $request->validate([
             'category' => 'required|string|max:255',
-            'thumbnail' => 'required|file|mimes:jpg,jpeg,png,webp|max:10240',
+            // 'thumbnail' => 'required|file|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
         $category_name = $request->category;
@@ -253,9 +253,9 @@ class DashboardController extends Controller
 
         $thumbnailPath = null;
 
-        if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('category_thumbnails', 'public');
-        }
+        // if ($request->hasFile('thumbnail')) {
+        //     $thumbnailPath = $request->file('thumbnail')->store('category_thumbnails', 'public');
+        // }
 
         Category::create([
             'name' => $category_name,

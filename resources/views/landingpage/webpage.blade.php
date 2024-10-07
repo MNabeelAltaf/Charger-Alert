@@ -13,7 +13,7 @@
 
     @include('landingpage.header')
     @include('landingpage.navbar')
-    @include('landingpage.content', ['categories' => $categories])
+    @include('landingpage.content')
     @include('landingpage.footer')
 
 

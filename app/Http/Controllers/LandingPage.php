@@ -9,11 +9,6 @@ class LandingPage extends Controller
 {
     public function landing_view(Request $request)
     {
-
-        $categories = Category::take(8)->get();
-
-
-
-        return view("welcome", ["categories" => $categories]);
+        return view("welcome");
     }
 }

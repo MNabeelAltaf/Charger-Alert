@@ -50,26 +50,155 @@
 
         <div id="categories"></div>
         <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
-            @foreach ($categories as $cats)
-                <div
-                    class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
-                    <div class="relative overflow-hidden h-80">
-                        <div class="relative overflow-hidden rounded-lg h-full">
-                            <img src="{{ url('storage') . '/' . $cats->thumb }}"
-                                class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
-                                alt="">
-                        </div>
-                    </div>
 
-                    <div class="mt-3 h-20">
-                        <div class="my-3 h-full">
-                            <a href="item-detail.html" class="font-semibold hover:text-violet-600">
-                                {{ $cats->name }}
-                            </a>
-                        </div>
+            <div
+                class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
+                <div class="relative overflow-hidden h-80">
+                    <div class="relative overflow-hidden rounded-lg h-full">
+                        <img src="{{ asset('assets/images/categories/category_1.jpg') }}"
+                            class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
+                            alt="">
                     </div>
                 </div>
-            @endforeach
+
+                <div class="mt-3 h-20">
+                    <div class="my-3 h-full">
+                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                          Animal
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
+                <div class="relative overflow-hidden h-80">
+                    <div class="relative overflow-hidden rounded-lg h-full">
+                        <img src="{{ asset('assets/images/categories/category_2.jpg') }}"
+                            class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
+                            alt="">
+                    </div>
+                </div>
+
+                <div class="mt-3 h-20">
+                    <div class="my-3 h-full">
+                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                           Human
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
+                <div class="relative overflow-hidden h-80">
+                    <div class="relative overflow-hidden rounded-lg h-full">
+                        <img src="{{ asset('assets/images/categories/category_3.png') }}"
+                            class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
+                            alt="">
+                    </div>
+                </div>
+
+                <div class="mt-3 h-20">
+                    <div class="my-3 h-full">
+                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                           IT
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
+                <div class="relative overflow-hidden h-80">
+                    <div class="relative overflow-hidden rounded-lg h-full">
+                        <img src="{{ asset('assets/images/categories/category_4.jpg') }}"
+                            class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
+                            alt="">
+                    </div>
+                </div>
+
+                <div class="mt-3 h-20">
+                    <div class="my-3 h-full">
+                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                            Cars
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
+                <div class="relative overflow-hidden h-80">
+                    <div class="relative overflow-hidden rounded-lg h-full">
+                        <img src="{{ asset('assets/images/categories/category_5.jpg') }}"
+                            class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
+                            alt="">
+                    </div>
+                </div>
+
+                <div class="mt-3 h-20">
+                    <div class="my-3 h-full">
+                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                            Emoji
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
+                <div class="relative overflow-hidden h-80">
+                    <div class="relative overflow-hidden rounded-lg h-full">
+                        <img src="{{ asset('assets/images/categories/category_6.png') }}"
+                            class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
+                            alt="">
+                    </div>
+                </div>
+
+                <div class="mt-3 h-20">
+                    <div class="my-3 h-full">
+                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                           Tech
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
+                <div class="relative overflow-hidden h-80">
+                    <div class="relative overflow-hidden rounded-lg h-full">
+                        <img src="{{ asset('assets/images/categories/category_7.webp') }}"
+                            class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
+                            alt="">
+                    </div>
+                </div>
+
+                <div class="mt-3 h-20">
+                    <div class="my-3 h-full">
+                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                           Neon
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 hover:-mt-2 h-100">
+                <div class="relative overflow-hidden h-80">
+                    <div class="relative overflow-hidden rounded-lg h-full">
+                        <img src="{{ asset('assets/images/categories/category_8.jpg') }}"
+                            class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full object-cover"
+                            alt="">
+                    </div>
+                </div>
+
+                <div class="mt-3 h-20">
+                    <div class="my-3 h-full">
+                        <a href="item-detail.html" class="font-semibold hover:text-violet-600">
+                           Birds
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -78,9 +207,11 @@
     #lottie-animation {
         transition: opacity 0.5s ease;
     }
+
     .loader-border {
-    border-top-color: transparent; /* Makes the top part of the loader transparent for a spinning effect */
-}
+        border-top-color: transparent;
+        /* Makes the top part of the loader transparent for a spinning effect */
+    }
 </style>
 
 <section class="relative lg:pt-24 pt-[74px] overflow-hidden">

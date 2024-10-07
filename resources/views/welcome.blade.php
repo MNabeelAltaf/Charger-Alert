@@ -11,7 +11,7 @@
 
 <body>
 
-    @include('landingpage.webpage',['categories' => $categories])
+    @include('landingpage.webpage')
 
 
 </body>
