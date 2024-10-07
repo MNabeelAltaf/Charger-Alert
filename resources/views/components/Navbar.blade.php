@@ -1,17 +1,24 @@
 <nav id="topnav" class="defaultscroll is-sticky">
     <div class="container">
         <!-- Logo container-->
+
+
         <a class="logo ps-0" href="{{ route('dashboard') }}">
-            <img src="{{ asset('assets/images/logo-dark.png') }}" class="inline-block sm:hidden" alt="">
+            <img src="{{ asset('assets/images/icon.png') }}" class="inline-block sm:hidden w-8 h-8" alt="">
+            <!-- Adjust size here -->
             <div class="sm:block hidden">
                 <span class="inline-block dark:hidden">
-                    <img src="{{ asset('assets/images/logo-dark.png') }}" class="l-dark h-7" alt="">
-                    <img src="{{ asset('assets/images/logo-dark.png') }}" class="l-light h-7" alt="">
+                    <img src="{{ asset('assets/images/logo-dark.png') }}" class="l-dark w-8 h-8" alt="">
+                    <!-- Adjust size here -->
+                    <img src="{{ asset('assets/images/icon.png') }}" class="l-light w-8 h-8" alt="">
+                    <!-- Adjust size here -->
                 </span>
-                <img src="{{ asset('assets/images/logo-dark.png') }}" height="24" class="hidden dark:inline-block"
-                    alt="">
+                <img src="{{ asset('assets/images/icon.png') }}" class="hidden dark:inline-block w-8 h-8"
+                    alt=""> <!-- Adjust size here -->
             </div>
         </a>
+
+
 
         <!-- End Logo container-->
         <div class="menu-extras">
