@@ -60,7 +60,12 @@
             <!--end grid-->
             <br>
 
-
+            <div class="bg-red-500">
+                <div class="inline-flex space-x-1">
+                    {{-- Display pagination links with query parameters --}}
+                    {{ $animations->withQueryString()->links('pagination::tailwind') }}
+                </div>
+            </div>
 
 
 
