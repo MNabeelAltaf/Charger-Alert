@@ -19,13 +19,13 @@
 
 
     <section class="relative md:py-24 py-16">
+
         <div class="container">
 
             <div class="flex flex-col items-center">
                 <h3 class="md:text-[30px] text-[26px] font-semibold text-center">{{ $category_name }} <br> Animations
                 </h3>
             </div>
-
             <!--end grid-->
             {{-- all animations --}}
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
@@ -56,17 +56,24 @@
                         </a>
                     </div>
                 @endforeach
-
             </div>
             <!--end grid-->
+            <br>
 
 
-            <div class="grid grid-cols-1 mt-6">
-                <div class="text-center">
-                    {{-- pagination --}}
-                </div>
-            </div><!--end grid-->
-        </div><!--end container-->
+
+
+
+
+
+            <br>
+            <br>
+
+            <!--end grid-->
+        </div>
+
+
+        <!--end container-->
     </section> <!--end section-->
     <!-- End -->
 
