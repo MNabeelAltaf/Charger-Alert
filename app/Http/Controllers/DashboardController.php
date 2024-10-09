@@ -209,7 +209,7 @@ class DashboardController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with("error","Category thumbnail must be less than 1 MB and Name must not be empty");
+                ->with("error", "Category thumbnail must be less than 1 MB and Name must not be empty");
         }
 
         $category = Category::findOrFail($request->category_id);
@@ -266,7 +266,6 @@ class DashboardController extends Controller
     }
 
 
-
     public function delete_anim(Request $request)
     {
 
@@ -284,5 +283,17 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard')
             ->with('error', 'Animation not found.');
+    }
+
+
+    public function delete_cate(Request $request)
+    {
+        $cat_id = $request->category_id;
+
+        Resource::where('category_id', $cat_id)->delete();
+
+        Category::where('id', $cat_id)->delete();
+
+        return back()->with('success', "Category has deleted");
     }
 }

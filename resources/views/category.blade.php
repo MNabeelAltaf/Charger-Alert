@@ -77,24 +77,44 @@
                 @if ($all_categories && $all_categories->count())
                     <div class="mx-6">
                         <h3 class="md:text-[30px] text-[26px] font-semibold text-center mb-4">All Categories</h3>
+                        <br>
                         @foreach ($all_categories as $category_names)
                             @php
                                 $randomColor = sprintf('#%06X', mt_rand(0, 0xffffff));
                             @endphp
                             <div class="relative inline-block">
-                                <span
-                                    class="absolute top-1 right-1 flex items-center justify-center w-6 h-6 bg-violet-600 rounded-full text-white">
-                                    <a href="{{ route('edit_category_view', ['category_id' => $category_names->id]) }}"
-                                        class="flex items-center justify-center">
-                                        <i class="mdi mdi-pencil" aria-hidden="true"></i>
-                                    </a>
-                                </span>
+                                <div class="flex flex-around items-center">
+                                    <span
+                                        class="flex items-center justify-center w-6 h-6 bg-violet-600 rounded-full text-white">
+                                        <a href="{{ route('edit_category_view', ['category_id' => $category_names->id]) }}"
+                                            class="flex items-center justify-center">
+                                            <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
+                                    &nbsp;
+                                    &nbsp;
+                                    <span
+                                        class="flex items-center justify-center w-6 h-6 bg-red-600 rounded-full text-white">
+                                        <form
+                                            action="{{ route('delete_category', ['category_id' => $category_names->id]) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                            @csrf
+                                            <button type="submit" class="flex items-center justify-center">
+                                                <i class="mdi mdi-delete" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </span>
+                                </div>
+
+
                                 <a href="{{ route('category_animations', ['category_id' => $category_names->id]) }}"
-                                    class="btn rounded-full mt-5 transition duration-300 ease-in-out hover:bg-opacity-80"
+                                    class="btn rounded-full mt-5 transition duration-300 ease-in-out hover:bg-opacity-80 "
                                     style="background-color: {{ $randomColor }}; border-color: {{ $randomColor }}; color: white;"
                                     title="{{ $category_names->name }}">
                                     {{ $category_names->name }}
                                 </a>
+
                             </div>
                         @endforeach
                     </div>

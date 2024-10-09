@@ -43,7 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-category-view', [DashboardController::class, 'edit_category_view'])->name('edit_category_view');
     Route::put('/edit-category', [DashboardController::class, 'edit_category'])->name('edit_category_data');
 
+
     Route::post('/delete-animation', [DashboardController::class, 'delete_anim'])->name('delete_animation');
+    Route::post('/delete-category', [DashboardController::class, 'delete_cate'])->name('delete_category');
 
 
 });
