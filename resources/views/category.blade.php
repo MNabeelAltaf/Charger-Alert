@@ -83,6 +83,8 @@
                                 $randomColor = sprintf('#%06X', mt_rand(0, 0xffffff));
                             @endphp
                             <div class="relative inline-block">
+                                <br>
+                                <br>
                                 <div class="flex flex-around items-center">
                                     <span
                                         class="flex items-center justify-center w-6 h-6 bg-violet-600 rounded-full text-white">
@@ -106,7 +108,6 @@
                                         </form>
                                     </span>
                                 </div>
-
 
                                 <a href="{{ route('category_animations', ['category_id' => $category_names->id]) }}"
                                     class="btn rounded-full mt-5 transition duration-300 ease-in-out hover:bg-opacity-80 "

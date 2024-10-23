@@ -13,48 +13,91 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        // Fetch all resources with their category names
+        // $resources = Resource::with('category')->get();
+
+        // $baseUrl = url('storage');
+        // $resourcesWithDetails = $resources->map(function ($resource) use ($baseUrl) {
+        //     $resource->path = $baseUrl . '/' . $resource->path;
+        //     $resource->thumbnail = $baseUrl . '/' . $resource->thumbnail;
+        //     $resource->isVideo = $resource->animation_type === 'Video';
+        //     return [
+        //         'id' => $resource->id,
+        //         'name' => $resource->name,
+        //         'path' => $resource->path,
+        //         'thumbnail' => $resource->thumbnail,
+        //         'category' => $resource->category->name,
+        //         'category_id' => $resource->category->id,
+        //         'isVideo' => $resource->isVideo
+
+        //     ];
+        // });
+
+        // $groupedResources = $resourcesWithDetails->groupBy('category');
+        // $response = $groupedResources->map(function ($animations, $categoryName) {
+
+        //     return [
+        //         'category' => $categoryName,
+        //         'category_id' => $animations[0]['category_id'],
+        //         // 'animations' => $animations->toArray() // Animations array
+        //         'animations' => $animations->shuffle()->toArray(),
+        //     ];
+        // })->values();
+
+
+        // return response()->json($response);
+
+        // ====================================================
+
+
+
+
         $resources = Resource::with('category')->get();
 
         $baseUrl = url('storage');
-
-        // Map resources to include necessary details and category info
         $resourcesWithDetails = $resources->map(function ($resource) use ($baseUrl) {
-            // Append base URL to the path and thumbnail
             $resource->path = $baseUrl . '/' . $resource->path;
             $resource->thumbnail = $baseUrl . '/' . $resource->thumbnail;
-
-            // Check if animation_type is "Video" to set isVideo
             $resource->isVideo = $resource->animation_type === 'Video';
-
-            // Return the resource details along with the category info
             return [
                 'id' => $resource->id,
                 'name' => $resource->name,
                 'path' => $resource->path,
                 'thumbnail' => $resource->thumbnail,
-                'category' => $resource->category->name, // Fetch category name here
-                'category_id' => $resource->category->id, // Fetch category ID here
+                'category' => $resource->category->name,
+                'category_id' => $resource->category->id,
                 'isVideo' => $resource->isVideo
             ];
         });
 
-        // Group resources by category name
         $groupedResources = $resourcesWithDetails->groupBy('category');
-
-        // Structure the response
-        // Structure the response
         $response = $groupedResources->map(function ($animations, $categoryName) {
+
+            $category = Resource::with('category')
+                ->where('category_id', $animations[0]['category_id'])
+                ->first()->category;
+
             return [
-                'category' => $categoryName, // Use category name here
-                'category_id' => $animations[0]['category_id'], // Access category_id from the first animation
-                // 'animations' => $animations->toArray() // Animations array
-                'animations' => $animations->shuffle()->toArray() // Animations array
+                'category' => $categoryName,
+                'category_id' => $animations[0]['category_id'],
+                'priority' => $category->priority,
+                'animations' => $animations->shuffle()->toArray(),
             ];
         })->values();
 
 
-        return response()->json($response);
+        $sortedResponse = collect($response)->sort(function ($a, $b) {
+            // Check if both priorities are null
+            if (is_null($a['priority']) && is_null($b['priority'])) return 0;
+            if (is_null($a['priority'])) return 1;
+            if (is_null($b['priority'])) return -1;
+
+            return $a['priority'] <=> $b['priority'];
+        })->values();
+
+
+        return response()->json($sortedResponse);
+
+
     }
 
     /**
