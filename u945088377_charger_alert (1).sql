@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 23, 2024 at 09:24 AM
+-- Generation Time: Oct 29, 2024 at 07:47 AM
 -- Server version: 10.11.9-MariaDB
 -- PHP Version: 7.2.34
 
@@ -31,6 +31,8 @@ CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `thumb` varchar(500) DEFAULT NULL,
+  `priority` int(100) DEFAULT NULL,
+  `visibility` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -39,19 +41,19 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `thumb`, `created_at`, `updated_at`) VALUES
-(5, 'Emoji', 'category_thumbnails/gsYpSKfx8PcxSNMo1qvJ99Nue4oPNXyqPO5SAplV.png', '2024-10-03 04:40:32', '2024-10-07 08:03:30'),
-(7, 'Neon', 'category_thumbnails/ROYTebn5X1cW58FWBtijlxfE8rH5RiIFUDPBEpF7.jpg', '2024-10-04 04:43:22', '2024-10-04 04:43:22'),
-(10, 'Birds', NULL, '2024-10-07 10:22:10', '2024-10-07 10:22:10'),
-(11, 'Circle', NULL, '2024-10-07 10:23:57', '2024-10-07 10:23:57'),
-(12, 'Battery', NULL, '2024-10-07 12:14:16', '2024-10-07 12:14:16'),
-(13, 'Animals', NULL, '2024-10-10 12:13:27', '2024-10-10 12:13:27'),
-(14, 'Robot', NULL, '2024-10-11 05:19:26', '2024-10-11 05:19:26'),
-(15, 'Flowers', NULL, '2024-10-15 04:52:08', '2024-10-15 04:52:08'),
-(16, 'Funny', NULL, '2024-10-15 09:27:29', '2024-10-15 09:27:29'),
-(17, 'Others', NULL, '2024-10-21 10:28:41', '2024-10-21 10:28:41'),
-(18, 'Galaxy', NULL, '2024-10-21 10:43:14', '2024-10-21 10:43:14'),
-(19, 'Halloween', NULL, '2024-10-23 04:25:30', '2024-10-23 04:25:30');
+INSERT INTO `categories` (`id`, `name`, `thumb`, `priority`, `visibility`, `created_at`, `updated_at`) VALUES
+(5, 'Emoji', 'category_thumbnails/gsYpSKfx8PcxSNMo1qvJ99Nue4oPNXyqPO5SAplV.png', NULL, 0, '2024-10-03 04:40:32', '2024-10-29 07:44:34'),
+(7, 'Neon', 'category_thumbnails/ROYTebn5X1cW58FWBtijlxfE8rH5RiIFUDPBEpF7.jpg', NULL, 0, '2024-10-04 04:43:22', '2024-10-29 06:05:35'),
+(10, 'Birds', NULL, NULL, 0, '2024-10-07 10:22:10', '2024-10-07 10:22:10'),
+(11, 'Circle', NULL, NULL, 0, '2024-10-07 10:23:57', '2024-10-07 10:23:57'),
+(12, 'Battery', NULL, NULL, 0, '2024-10-07 12:14:16', '2024-10-07 12:14:16'),
+(13, 'Animals', NULL, NULL, 0, '2024-10-10 12:13:27', '2024-10-10 12:13:27'),
+(14, 'Robot', NULL, NULL, 0, '2024-10-11 05:19:26', '2024-10-11 05:19:26'),
+(15, 'Flowers', NULL, NULL, 0, '2024-10-15 04:52:08', '2024-10-15 04:52:08'),
+(16, 'Funny', NULL, NULL, 0, '2024-10-15 09:27:29', '2024-10-15 09:27:29'),
+(17, 'Others', NULL, NULL, 0, '2024-10-21 10:28:41', '2024-10-21 10:28:41'),
+(18, 'Galaxy', NULL, NULL, 0, '2024-10-21 10:43:14', '2024-10-29 06:15:50'),
+(19, 'Halloween', NULL, 1, 0, '2024-10-23 04:25:30', '2024-10-23 04:25:30');
 
 -- --------------------------------------------------------
 
@@ -296,7 +298,6 @@ INSERT INTO `resources` (`id`, `name`, `path`, `thumbnail`, `category_id`, `anim
 (182, 'Halloween 36', 'resources/6718807bc5867.json', 'thumbnail/mI8eikWK5pvns7KIvN5DYq6fSBsUlAn9STXoZJg2.jpg', '19', 'Lottie', '2024-10-23 04:50:03', '2024-10-23 04:50:03'),
 (183, 'Halloween 37', 'resources/6718808d608c3.json', 'thumbnail/l6prrwN3IrGpK3bObJjank1hi9Ry9kpEeA8y7s4C.jpg', '19', 'Lottie', '2024-10-23 04:50:21', '2024-10-23 04:50:21'),
 (184, 'Halloween 38', 'resources/6718809c8d7dd.json', 'thumbnail/7m5j98lfWwRP9GJDQYiZz0vXvDzsysbbO4CH0Zwr.jpg', '19', 'Lottie', '2024-10-23 04:50:36', '2024-10-23 04:50:36'),
-(185, 'Halloween 38', 'resources/671880e71c600.json', 'thumbnail/AXgSF6qat4CpKV2Agny8cKV7SvTM6nQB21hqOQsR.jpg', '19', 'Lottie', '2024-10-23 04:51:51', '2024-10-23 04:51:51'),
 (186, 'Halloween 39', 'resources/671880f8e18cd.json', 'thumbnail/FwNbhCBHO4Y7UvUheOATZebnaVPtBHHjfCDRs9wM.jpg', '19', 'Lottie', '2024-10-23 04:52:08', '2024-10-23 04:52:08'),
 (187, 'Halloween 40', 'resources/671881081b37f.json', 'thumbnail/o97WDyXaLffoAxoG948kPlfMN0VP8CtuE6IH0cce.jpg', '19', 'Lottie', '2024-10-23 04:52:24', '2024-10-23 04:52:24'),
 (188, 'Halloween 41', 'resources/6718820b76d1b.json', 'thumbnail/PCwTeH1tyT7QpvgVxgYNmW2yTKVtHUmX469l7lNb.jpg', '19', 'Lottie', '2024-10-23 04:56:43', '2024-10-23 04:56:43'),
@@ -312,7 +313,19 @@ INSERT INTO `resources` (`id`, `name`, `path`, `thumbnail`, `category_id`, `anim
 (198, 'Halloween 51', 'resources/6718839844694.json', 'thumbnail/2rdScsjAwRQmc4w2EunC0il5DmuPY14sWH5cPQRw.jpg', '19', 'Lottie', '2024-10-23 05:03:20', '2024-10-23 05:03:20'),
 (199, 'Halloween 52', 'resources/671883a838008.json', 'thumbnail/EKgeHalD42Gh58671UNBYz9BfjzziK6XWfNfbvAe.jpg', '19', 'Lottie', '2024-10-23 05:03:36', '2024-10-23 05:03:36'),
 (200, 'Halloween 53', 'resources/671883b7e5640.json', 'thumbnail/7xQl0ccl059lVjBRYs50p3COSN1f5oVIaT5tzMzI.jpg', '19', 'Lottie', '2024-10-23 05:03:51', '2024-10-23 05:03:51'),
-(201, 'Halloween 54', 'resources/671883cada928.json', 'thumbnail/tJ2Ra0GUyU1XYsVY6xmSicXWksy3F1ESOeif2DFz.jpg', '19', 'Lottie', '2024-10-23 05:04:10', '2024-10-23 05:04:10');
+(201, 'Halloween 54', 'resources/671883cada928.json', 'thumbnail/tJ2Ra0GUyU1XYsVY6xmSicXWksy3F1ESOeif2DFz.jpg', '19', 'Lottie', '2024-10-23 05:04:10', '2024-10-23 05:04:10'),
+(205, 'Battery 6', 'resources/671b43ca1cb53.mov', 'thumbnail/kLXvQg1DX5auTaOuDFx2oIGk6ALyWXnqcnKeGjjV.jpg', '12', 'Video', '2024-10-25 07:07:54', '2024-10-25 07:07:54'),
+(206, 'Battery 7', 'resources/671b43e7c52ad.mov', 'thumbnail/lLyVGQNbUV9io3Rm9WlbNwl29JAnL21av4kgQ1hN.jpg', '7', 'Video', '2024-10-25 07:08:23', '2024-10-25 07:10:45'),
+(207, 'Battery 8', 'resources/671b441f67707.mov', 'thumbnail/YqciEcv3Pkf8pVgygsY8gtf5otEVaNAX0RrDnI4X.jpg', '12', 'Video', '2024-10-25 07:09:19', '2024-10-25 07:09:19'),
+(208, 'Battery 9', 'resources/671b443713fca.mov', 'thumbnail/tjX8zPAtVfCn9iHBBKkADpbtUSGnkqHNxOqaPwmi.jpg', '12', 'Video', '2024-10-25 07:09:43', '2024-10-25 07:09:43'),
+(209, 'Battery 10', 'resources/671b445831339.mov', 'thumbnail/9mLjhlxBrZkLjZSkJFHN1qIu7koOyA3OfOBeIJMS.jpg', '12', 'Video', '2024-10-25 07:10:16', '2024-10-25 07:10:16'),
+(211, 'neon8', 'resources/671b451d326e2.mov', 'thumbnail/cQyFGN1tX09ELfB1i3fe9dcmHvmJk492bm0qBmpo.jpg', '7', 'Video', '2024-10-25 07:13:33', '2024-10-25 07:13:33'),
+(213, 'neon10', 'resources/671b455ce77dd.mov', 'thumbnail/UPcbBZ4V2w0rMRQvOjSz0lS0hBGTQB51yMiLEwkJ.jpg', '7', 'Video', '2024-10-25 07:14:36', '2024-10-25 07:14:36'),
+(214, 'neon11', 'resources/671b458228439.mov', 'thumbnail/Dq3soOCbQlZ9vWnAsEoqLHIlv8m79ae1Edk9QKXH.jpg', '7', 'Video', '2024-10-25 07:15:14', '2024-10-25 07:15:14'),
+(215, 'neon12', 'resources/671b45a2856ec.mov', 'thumbnail/jbqynE4t0paf0dm0Wm7rYymR9203ZEN0IRe3bXyq.jpg', '7', 'Video', '2024-10-25 07:15:46', '2024-10-25 07:15:46'),
+(218, 'neon15', 'resources/671b4603bfaa4.mov', 'thumbnail/AiPMF7FHq4qY4tthLDOovn4VDCrXqOEFFMrUmNMe.jpg', '7', 'Video', '2024-10-25 07:17:23', '2024-10-25 07:17:23'),
+(219, 'battery 56', 'resources/671b95cc2f03f.mp4', 'thumbnail/uLmeB4GMxXhD3oZ3hX4sUaEyvaHt4GuPBH41skQF.jpg', '12', 'Video', '2024-10-25 12:57:48', '2024-10-25 12:57:48'),
+(220, 'battery t546', 'resources/671b96ba46117.mp4', 'thumbnail/th9CLBxo5uJGmBDjTjTsYhGntGHjb2O9ArET85EW.jpg', '12', 'Video', '2024-10-25 12:58:06', '2024-10-25 13:01:46');
 
 -- --------------------------------------------------------
 
@@ -336,7 +349,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'maya khan', 'shoaib.mobipixels@gmail.com', NULL, '$2y$12$Vci/gHy2hE.ihvIsqyUAYeBnOgTUcID/d0o0lSjfnjzYMXzFkOkHq', '8eAloF5ajlhgalBAtSQsEEcm7P1f0RYwQYLDbby9qNdmxDhcZ6r32xppjAkl', '2024-09-27 06:13:32', '2024-09-27 06:13:32');
+(1, 'maya khan', 'shoaib.mobipixels@gmail.com', NULL, '$2y$12$Vci/gHy2hE.ihvIsqyUAYeBnOgTUcID/d0o0lSjfnjzYMXzFkOkHq', 'EPQh3mnanHHnBYbUxtCIxfEjZYH8SCLYFDowxjpladWQvrF6q762phhPHc1a', '2024-09-27 06:13:32', '2024-09-27 06:13:32');
 
 --
 -- Indexes for dumped tables
@@ -420,7 +433,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `resources`
 --
 ALTER TABLE `resources`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
 
 --
 -- AUTO_INCREMENT for table `users`

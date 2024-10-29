@@ -13,43 +13,6 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        // $resources = Resource::with('category')->get();
-
-        // $baseUrl = url('storage');
-        // $resourcesWithDetails = $resources->map(function ($resource) use ($baseUrl) {
-        //     $resource->path = $baseUrl . '/' . $resource->path;
-        //     $resource->thumbnail = $baseUrl . '/' . $resource->thumbnail;
-        //     $resource->isVideo = $resource->animation_type === 'Video';
-        //     return [
-        //         'id' => $resource->id,
-        //         'name' => $resource->name,
-        //         'path' => $resource->path,
-        //         'thumbnail' => $resource->thumbnail,
-        //         'category' => $resource->category->name,
-        //         'category_id' => $resource->category->id,
-        //         'isVideo' => $resource->isVideo
-
-        //     ];
-        // });
-
-        // $groupedResources = $resourcesWithDetails->groupBy('category');
-        // $response = $groupedResources->map(function ($animations, $categoryName) {
-
-        //     return [
-        //         'category' => $categoryName,
-        //         'category_id' => $animations[0]['category_id'],
-        //         // 'animations' => $animations->toArray() // Animations array
-        //         'animations' => $animations->shuffle()->toArray(),
-        //     ];
-        // })->values();
-
-
-        // return response()->json($response);
-
-        // ====================================================
-
-
-
 
         $resources = Resource::with('category')->get();
 
@@ -80,6 +43,7 @@ class ResourceController extends Controller
                 'category' => $categoryName,
                 'category_id' => $animations[0]['category_id'],
                 'priority' => $category->priority,
+                'visibility' => $category->visibility,
                 'animations' => $animations->shuffle()->toArray(),
             ];
         })->values();
