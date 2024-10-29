@@ -260,7 +260,8 @@ class DashboardController extends Controller
 
         Category::create([
             'name' => $category_name,
-            'thumb' => $thumbnailPath ?  $thumbnailPath : null
+            'thumb' => $thumbnailPath ?  $thumbnailPath : null,
+            'visibility'=>0
         ]);
 
         return back()->with('success', 'Category has been added');

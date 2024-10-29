@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','thumb'];
+    protected $fillable = ['name','thumb','priority','visibility'];
     public $timestamps = true;
 
     public function resources()
