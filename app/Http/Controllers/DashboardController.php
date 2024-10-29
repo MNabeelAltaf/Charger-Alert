@@ -263,7 +263,6 @@ class DashboardController extends Controller
             'thumb' => $thumbnailPath ?  $thumbnailPath : null,
             'visibility'=>0
         ]);
-
         return back()->with('success', 'Category has been added');
     }
 
