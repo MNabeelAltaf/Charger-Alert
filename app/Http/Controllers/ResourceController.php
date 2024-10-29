@@ -13,55 +13,7 @@ class ResourceController extends Controller
      */
     public function index()
     {
-
-        $resources = Resource::with('category')->get();
-
-        $baseUrl = url('storage');
-        $resourcesWithDetails = $resources->map(function ($resource) use ($baseUrl) {
-            $resource->path = $baseUrl . '/' . $resource->path;
-            $resource->thumbnail = $baseUrl . '/' . $resource->thumbnail;
-            $resource->isVideo = $resource->animation_type === 'Video';
-            return [
-                'id' => $resource->id,
-                'name' => $resource->name,
-                'path' => $resource->path,
-                'thumbnail' => $resource->thumbnail,
-                'category' => $resource->category->name,
-                'category_id' => $resource->category->id,
-                'isVideo' => $resource->isVideo
-            ];
-        });
-
-        $groupedResources = $resourcesWithDetails->groupBy('category');
-        $response = $groupedResources->map(function ($animations, $categoryName) {
-
-            $category = Resource::with('category')
-                ->where('category_id', $animations[0]['category_id'])
-                ->first()->category;
-
-            return [
-                'category' => $categoryName,
-                'category_id' => $animations[0]['category_id'],
-                'priority' => $category->priority,
-                'visibility' => $category->visibility,
-                'animations' => $animations->shuffle()->toArray(),
-            ];
-        })->values();
-
-
-        $sortedResponse = collect($response)->sort(function ($a, $b) {
-            // Check if both priorities are null
-            if (is_null($a['priority']) && is_null($b['priority'])) return 0;
-            if (is_null($a['priority'])) return 1;
-            if (is_null($b['priority'])) return -1;
-
-            return $a['priority'] <=> $b['priority'];
-        })->values();
-
-
-        return response()->json($sortedResponse);
-
-
+        return $this->category_api();
     }
 
     /**
@@ -70,28 +22,10 @@ class ResourceController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'path' => 'required|file|mimes:mp4,avi,mov,flv,webm,json|max:10240',
-                'thumbnail' => 'required|file|mimes:jpg,jpeg,webp|max:10240',
-            ]);
 
-            $filePath = $request->file('path')->store('resources', 'public');
-            $thumbnailPath = $request->file('thumbnail')->store('thumbnail', 'public');
-            $resource = Resource::create([
-                'name' => $validated['name'],
-                'path' => $filePath,
-                'thumbnail' => $thumbnailPath,
-            ]);
+        $app_version = $request->input('version');
+        return $this->category_api($app_version);
 
-            return response()->json($resource, 201);
-        } catch (ValidationException $e) {
-            return response()->json([
-                'errors' => $e->validator->errors(),
-                'message' => 'Validation failed',
-            ], 422);
-        }
     }
 
 
@@ -123,5 +57,59 @@ class ResourceController extends Controller
         } else {
             return response()->json(['message' => 'Resource not found.'], 404);
         }
+    }
+
+
+    // api function
+    public function category_api($app_version = 'default_version')
+    {
+        $resources = Resource::with('category')->get();
+
+        $baseUrl = url('storage');
+        $resourcesWithDetails = $resources->map(function ($resource) use ($baseUrl) {
+            $resource->path = $baseUrl . '/' . $resource->path;
+            $resource->thumbnail = $baseUrl . '/' . $resource->thumbnail;
+            $resource->isVideo = $resource->animation_type === 'Video';
+
+            return [
+                'id' => $resource->id,
+                'name' => $resource->name,
+                'path' => $resource->path,
+                'thumbnail' => $resource->thumbnail,
+                'category' => $resource->category->name,
+                'category_id' => $resource->category->id,
+                'isVideo' => $resource->isVideo
+            ];
+        });
+
+        $groupedResources = $resourcesWithDetails->groupBy('category');
+        $response = $groupedResources->map(function ($animations, $categoryName) use ($app_version) {
+
+            $category = Resource::with('category')
+                ->where('category_id', $animations[0]['category_id'])
+                ->first()->category;
+
+            return [
+                'app_version' => $app_version,
+                'category' => $categoryName,
+                'category_id' => $animations[0]['category_id'],
+                'priority' => $category->priority,
+                'visibility' => $category->visibility,
+                'animations' => $animations->shuffle()->toArray(),
+            ];
+        })->values();
+
+
+        $sortedResponse = collect($response)->sort(function ($a, $b) {
+            // Check if both priorities are null
+            if (is_null($a['priority']) && is_null($b['priority'])) return 0;
+            if (is_null($a['priority'])) return 1;
+            if (is_null($b['priority'])) return -1;
+
+            return $a['priority'] <=> $b['priority'];
+        })->values();
+
+        return response()->json($sortedResponse);
+
     }
 }
