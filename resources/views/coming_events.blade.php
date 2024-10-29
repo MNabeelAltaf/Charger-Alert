@@ -31,7 +31,7 @@
             <div class="grid md:grid-cols-12 gap-[30px]">
                 <div class="lg:col-span-12 md:col-span-12">
                     <div class="p-6 rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900">
-                        <h3 class="md:text-[30px] text-[26px] font-semibold text-center mb-4">Upcoming events</h3>
+                        <h3 class="md:text-[30px] text-[26px] font-semibold text-center mb-4">Set Priority</h3>
                         {{-- <p class="md:text-[10px] text-[16px] font-semibold text-center mb-4"><span>Add Event</span></p> --}}
                         <br>
                         <br>

@@ -58,44 +58,56 @@
                                             value="{{ old('name', $category_data->name) }}" required>
                                     </div>
                                     <br>
+                                    {{-- <input name="category_id" type="hidden" value={{ $category_data->id }} /> --}}
+
+                                    <div class="flex items-center justify-between mt-5">
+                                        <input name="category_id" type="hidden" value="{{ $category_data->id }}" />
+
+                                        <input type="submit" id="submit" name="send"
+                                            class="btn bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full"
+                                            value="Update">
 
 
-                                    {{-- <div class="flex items-center space-x-3">
-                                        <label class="form-label font-medium">Thumbnail<span
-                                                class="text-red-600">*</span></label>
-                                        <input type="file" id="input-file2" name="thumbnail" accept="image/*"
-                                            value="{{ $category_data->thumb }}"
-                                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-400 transition duration-200 ease-in-out file:bg-gray-200 file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer file:hover:bg-gray-300 dark:file:bg-gray-700 dark:file:hover:bg-gray-600">
+                                        @if ($category_data->visibility == 0)
+                                            <div class="flex items-center space-x-4">
+                                                <span id="toggleLabel" class="text-white font-semibold">Hide</span>
+                                                &nbsp;
+                                                &nbsp;
+                                                &nbsp;
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" name="visibilityToggle" id="toggleSwitch"
+                                                        class="sr-only peer" value="0"> <!-- Unchecked -->
+                                                    <div
+                                                        class="w-14 h-8 bg-black peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-violet-300 rounded-full peer dark:bg-black peer-checked:bg-violet-600">
+                                                    </div>
+                                                    <span
+                                                        class="w-6 h-6 absolute left-1 top-1 bg-white rounded-full transition-transform peer-checked:translate-x-6"></span>
+                                                </label>
+                                            </div>
+                                        @else
+                                            <div class="flex items-center space-x-4">
+                                                <span id="toggleLabel" class="text-white font-semibold">Show</span>
+                                                &nbsp;
+                                                &nbsp;
+                                                &nbsp;
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" name="visibilityToggle" id="toggleSwitch"
+                                                        class="sr-only peer" value="1" checked> <!-- Checked -->
+                                                    <div
+                                                        class="w-14 h-8 bg-black peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-violet-300 rounded-full peer dark:bg-black peer-checked:bg-violet-600">
+                                                    </div>
+                                                    <span
+                                                        class="w-6 h-6 absolute left-1 top-1 bg-white rounded-full transition-transform peer-checked:translate-x-6"></span>
+                                                </label>
+                                            </div>
+                                        @endif
+
+
+
+
                                     </div>
 
-
-                                    <div class="flex items-center space-x-3 my-10" style="height: 140px;">
-                                        <img src="{{ $thumb }}" alt="category thumbnail"
-                                            style="height: 140px; width: 140px;">
-                                    </div> --}}
-
-
-
-                                    {{-- <div class="flex items-center space-x-3">
-                                        <label class="form-label font-medium">Thumbnail<span
-                                                class="text-red-600">*</span></label>
-                                        <input type="file" id="input-file2" name="thumbnail" accept="image/*"
-                                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-400 transition duration-200 ease-in-out file:bg-gray-200 file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer file:hover:bg-gray-300 dark:file:bg-gray-700 dark:file:hover:bg-gray-600">
-                                    </div> --}}
-
-                                    {{-- <div class="flex items-center space-x-3 my-10" style="height: 140px;">
-                                        <img id="image-preview" src="{{ $thumb }}" alt="category thumbnail"
-                                            style="height: 140px; width: 140px;">
-                                    </div> --}}
-
-                                    <input name="category_id" type="hidden" value={{ $category_data->id }} />
-
-                                    <input type="submit" id="submit" name="send"
-                                        class="btn bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full mt-5"
-                                        value="Update">
                             </form>
-
-
                         </div>
                     </div>
                 </div>
@@ -130,6 +142,23 @@
                     imagePreview.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+    <script>
+        const toggleSwitch = document.getElementById('toggleSwitch');
+        const toggleLabel = document.getElementById('toggleLabel');
+
+        toggleLabel.textContent = toggleSwitch.checked ? 'Show' : 'Hide';
+
+        toggleSwitch.addEventListener('change', () => {
+            if (toggleSwitch.checked) {
+                toggleLabel.textContent = 'Show';
+                toggleSwitch.value = '1';
+            } else {
+                toggleLabel.textContent = 'Hide';
+                toggleSwitch.value = '0';
             }
         });
     </script>

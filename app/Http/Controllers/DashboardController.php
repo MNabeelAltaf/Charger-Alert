@@ -205,7 +205,6 @@ class DashboardController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|integer|exists:categories,id',
             'name' => 'required|string|max:255',
-            // 'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -213,14 +212,15 @@ class DashboardController extends Controller
                 ->with("error", "Category thumbnail must be less than 1 MB and Name must not be empty");
         }
 
+        $visibilityValue = $request->has('visibilityToggle') ? 1 : 0;
+
+
         $category = Category::findOrFail($request->category_id);
 
-        $category->name = $request->name;
 
-        // if ($request->hasFile('thumbnail')) {
-        //     $thumbnailPath = $request->file('thumbnail')->store('category_thumbnails', 'public');
-        //     $category->thumb = $thumbnailPath;
-        // }
+        $category->name = $request->name;
+        $category->visibility = $visibilityValue;
+
 
         $category->save();
 
