@@ -58,7 +58,6 @@
                                             value="{{ old('name', $category_data->name) }}" required>
                                     </div>
                                     <br>
-                                    {{-- <input name="category_id" type="hidden" value={{ $category_data->id }} /> --}}
 
                                     <div class="flex items-center justify-between mt-5">
                                         <input name="category_id" type="hidden" value="{{ $category_data->id }}" />
@@ -66,7 +65,6 @@
                                         <input type="submit" id="submit" name="send"
                                             class="btn bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full"
                                             value="Update">
-
 
                                         @if ($category_data->visibility == 0)
                                             <div class="flex items-center space-x-4">
@@ -101,12 +99,7 @@
                                                 </label>
                                             </div>
                                         @endif
-
-
-
-
                                     </div>
-
                             </form>
                         </div>
                     </div>

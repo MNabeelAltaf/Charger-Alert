@@ -16,6 +16,10 @@
     <!-- End Navbar -->
 
 
+    <!-- Include Font Awesome from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
 
 
     <section class="relative md:py-24 py-16">
@@ -76,12 +80,62 @@
                                 </div>
                             </div>
 
-                            <div class="flex-none h-1/5 mt-2">
+                            <div class=" flex h-1/5 mt-2">
                                 <div class="my-3">
                                     <a href="{{ route('category_animations', ['category_id' => $categories->id]) }}"
                                         class="font-semibold hover:text-violet-600">
                                         {{ $categories->name }}
                                     </a>
+                                </div>
+                                &nbsp;
+                                &nbsp;
+                                <span class="my-3 ">||</span>
+                                &nbsp;
+                                &nbsp;
+                                <div class="my-3 ">
+                                    @if ($categories->visibility == 0)
+                                        <p>
+                                            <a href="{{ route('edit_category_view', ['category_id' => $categories->id]) }}"
+                                                title="Visibility in app"
+                                                class="hover:text-blue-500 transition duration-300">
+                                                <i class="fas fa-eye text-green-500 mr-2"></i>
+                                            </a>
+                                        </p>
+                                    @elseif ($categories->visibility == 1)
+                                        <p>
+                                            <a title="Visibility in app"
+                                                class="hover:text-blue-500 transition duration-300"
+                                                href="{{ route('edit_category_view', ['category_id' => $categories->id]) }}">
+                                                <i class="fas fa-eye-slash text-red-500"></i>
+                                            </a>
+                                        </p>
+                                    @endif
+                                </div>
+                                &nbsp;
+                                &nbsp;
+                                <span class="my-3 ">||</span>
+                                &nbsp;
+                                &nbsp;
+                                <div class="my-3 ">
+                                    @if ($categories->priority != null)
+                                        <h3>
+                                            <a title="Event-wise Priority"
+                                                class="hover:text-blue-500 transition duration-300"
+                                                href="{{ route('events_view') }}">
+                                                <strong class="text-xl font-semibold">
+                                                    {{ $categories->priority }}
+                                                </strong>
+                                            </a>
+                                        </h3>
+                                    @else
+                                        <p>
+                                            <a title="Event-wise Priority"
+                                                class="hover:text-blue-500 transition duration-300"
+                                                href="{{ route('events_view') }}">
+                                                -
+                                            </a>
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </a>
