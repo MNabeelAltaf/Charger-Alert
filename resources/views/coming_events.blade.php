@@ -109,7 +109,7 @@
 
                 @if ($priority_added_category && count($priority_added_category))
                     <div class="mx-6">
-                        <h3 class="md:text-[30px] text-[26px] font-semibold text-center mb-4">Event-wise Categories</h3>
+                        <h3 class="md:text-[30px] text-[26px] font-semibold text-center mb-4">Priority-wise Categories</h3>
                         <br>
 
                         @php
