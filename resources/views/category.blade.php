@@ -46,17 +46,16 @@
                                             class="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-2 "
                                             placeholder="Category name:" id="category" name="category" required>
                                     </div>
+
                                     <br>
 
                                     {{-- <div>
                                         <label class="form-label font-medium">Thumbnail<span
                                                 class="text-red-600">*</span></label>
-
                                         <input type="file" id="thumbnail" name="thumbnail" accept=".jpg,.jpeg,.png"
                                             placeholder="Category Thumbnail:"
                                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-400 transition duration-200 ease-in-out file:bg-gray-200 file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer file:hover:bg-gray-300 dark:file:bg-gray-700 dark:file:hover:bg-gray-600"
                                             required>
-
                                     </div> --}}
 
                                     <div>

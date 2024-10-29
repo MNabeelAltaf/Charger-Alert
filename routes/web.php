@@ -4,6 +4,7 @@
 use App\Http\Controllers\LandingPage;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EventsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/delete-animation', [DashboardController::class, 'delete_anim'])->name('delete_animation');
     Route::post('/delete-category', [DashboardController::class, 'delete_cate'])->name('delete_category');
+
+
+
+    Route::get('events', [EventsController::class, 'view_event'])->name('events_view');
+
+    Route::post('/delete_priority',  [EventsController::class, 'delete_priority'])->name('deletePriority');
+
+    Route::post('/set_priority',  [EventsController::class, 'set_category_priority'])->name('setPriority');
+
 
 
 });

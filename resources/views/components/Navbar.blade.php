@@ -94,6 +94,11 @@
                 <li class="has-submenu parent-parent-menu-item">
                     <a href="{{ route('category_view') }}">Category</a>
                 </li>
+
+                <li class="has-submenu parent-parent-menu-item">
+                    <a href="{{ route('events_view') }}">Events</a>
+                </li>
+
             </ul>
         </div>
     </div>

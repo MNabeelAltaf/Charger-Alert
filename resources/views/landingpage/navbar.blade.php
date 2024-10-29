@@ -51,7 +51,7 @@
                 <li class="has-submenu parent-parent-menu-item">
                     <a href="#categories">Explore</a>
                 </li>
-            </ul><!--end navigation menu-->
-        </div><!--end navigation-->
-    </div><!--end container-->
+            </ul>
+        </div>
+    </div>
 </nav>
