@@ -149,7 +149,7 @@
                                         <form
                                             action="{{ route('deletePriority', ['category_id' => $category_names['id']]) }}"
                                             method="POST"
-                                            onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                            onsubmit="return confirm('Are you sure you want to reset priority?');">
                                             @csrf
                                             <button type="submit" class="flex items-center justify-center">
                                                 <i class="mdi mdi-delete" aria-hidden="true"></i>
