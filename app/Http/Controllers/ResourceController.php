@@ -107,7 +107,7 @@ class ResourceController extends Controller
             if (is_null($b['priority'])) return -1;
 
             return $a['priority'] <=> $b['priority'];
-        })->values();
+        })->values()->shuffle();
 
         return response()->json($sortedResponse);
 
