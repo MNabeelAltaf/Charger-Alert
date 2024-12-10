@@ -63,6 +63,7 @@ class ResourceController extends Controller
     // api function
     public function category_api($app_version = 'default_version')
     {
+
         $resources = Resource::with('category')->get();
 
         $baseUrl = url('storage');
@@ -78,7 +79,8 @@ class ResourceController extends Controller
                 'thumbnail' => $resource->thumbnail,
                 'category' => $resource->category->name,
                 'category_id' => $resource->category->id,
-                'isVideo' => $resource->isVideo
+                'isVideo' => $resource->isVideo,
+                'priority' => $resource->category->priority, // Ensure we get the priority value
             ];
         });
 
@@ -95,21 +97,35 @@ class ResourceController extends Controller
                 'category_id' => $animations[0]['category_id'],
                 'priority' => $category->priority,
                 'visibility' => $category->visibility,
-                'animations' => $animations->shuffle()->toArray(),
+                'animations' => $animations,
             ];
         })->values();
 
 
-        $sortedResponse = collect($response)->sort(function ($a, $b) {
-            // Check if both priorities are null
+        $withPriority = $response->filter(function ($item) {
+            return $item['priority'] !== null;
+        });
+
+        $withoutPriority = $response->filter(function ($item) {
+            return $item['priority'] === null;
+        });
+
+        $withoutPriority = $withoutPriority->shuffle();
+
+
+        $finalResponse = $withPriority->merge($withoutPriority);
+
+
+        $sortedResponse = $finalResponse->sort(function ($a, $b) {
             if (is_null($a['priority']) && is_null($b['priority'])) return 0;
             if (is_null($a['priority'])) return 1;
             if (is_null($b['priority'])) return -1;
 
             return $a['priority'] <=> $b['priority'];
-        })->values()->shuffle();
+        })->values();
 
         return response()->json($sortedResponse);
+
 
     }
 }
