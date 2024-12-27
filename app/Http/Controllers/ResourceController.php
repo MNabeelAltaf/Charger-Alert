@@ -97,7 +97,7 @@ class ResourceController extends Controller
                 'category_id' => $animations[0]['category_id'],
                 'priority' => $category->priority,
                 'visibility' => $category->visibility,
-                'animations' => $animations,
+                'animations' => collect($animations)->shuffle(),
             ];
         })->values();
 
