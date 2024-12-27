@@ -61,7 +61,7 @@ class DashboardController extends Controller
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
-                'path' => 'required|file|mimes:mp4,avi,mov,flv,webm,json,txt|max:10240',
+                'path' => 'required|file|mimetypes:video/*,application/json,text/plain|max:3072',
                 'thumbnail' => 'required|file|mimes:jpg,jpeg,webp,png|max:10240',
                 'category' => 'required',
                 'animation_type' => 'required',
@@ -85,6 +85,9 @@ class DashboardController extends Controller
 
             return back()->with('success', 'Successfully created');
         } catch (ValidationException $e) {
+
+            dd($e);
+
             return back()->with('error', 'Something went wrong');
         }
     }
