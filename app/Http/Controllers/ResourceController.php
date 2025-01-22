@@ -25,7 +25,6 @@ class ResourceController extends Controller
 
         $app_version = $request->input('version');
         return $this->category_api($app_version);
-
     }
 
 
@@ -80,11 +79,23 @@ class ResourceController extends Controller
                 'category' => $resource->category->name,
                 'category_id' => $resource->category->id,
                 'isVideo' => $resource->isVideo,
-                'priority' => $resource->category->priority, // Ensure we get the priority value
+                'priority' => $resource->category->priority,
+                'order' => $resource->position,
             ];
         });
 
-        $groupedResources = $resourcesWithDetails->groupBy('category');
+        // $groupedResources = $resourcesWithDetails->groupBy('category');
+
+
+        $groupedResources = $resourcesWithDetails
+        ->groupBy('category') // Group by category name
+        ->map(function ($group) {
+            return $group->sortBy('order')->values(); // Sort by 'order' and reset keys
+        })
+        ->values(); // Reset keys for the grouped collection
+
+
+
         $response = $groupedResources->map(function ($animations, $categoryName) use ($app_version) {
 
             $category = Resource::with('category')
@@ -97,7 +108,8 @@ class ResourceController extends Controller
                 'category_id' => $animations[0]['category_id'],
                 'priority' => $category->priority,
                 'visibility' => $category->visibility,
-                'animations' => collect($animations)->shuffle(),
+                // 'animations' => collect($animations)->shuffle(),
+                'animations' => collect($animations),
             ];
         })->values();
 
@@ -110,7 +122,7 @@ class ResourceController extends Controller
             return $item['priority'] === null;
         });
 
-        $withoutPriority = $withoutPriority->shuffle();
+        // $withoutPriority = $withoutPriority->shuffle();
 
 
         $finalResponse = $withPriority->merge($withoutPriority);
@@ -125,7 +137,5 @@ class ResourceController extends Controller
         })->values();
 
         return response()->json($sortedResponse);
-
-
     }
 }

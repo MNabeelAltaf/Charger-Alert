@@ -46,7 +46,6 @@ class DashboardController extends Controller
             return back()->with('error', 'Category not found.');
         }
 
-        // $animations = Resource::where('category_id', $categoryID)->paginate(160);
 
         $animations = Resource::where('category_id', $categoryID)
             ->orderBy('position')
