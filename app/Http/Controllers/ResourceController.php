@@ -96,6 +96,7 @@ class ResourceController extends Controller
 
 
 
+
         $response = $groupedResources->map(function ($animations, $categoryName) use ($app_version) {
 
             $category = Resource::with('category')
