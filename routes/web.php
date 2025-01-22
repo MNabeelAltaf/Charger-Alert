@@ -22,10 +22,16 @@ Route::get('/', [LandingPage::class, 'landing_view'])->name('homepage');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/add_new_animation', [DashboardController::class, 'add_new_animation'])->middleware(['auth', 'verified'])->name('add_new_animation');
+Route::get('/add_new_animation', [DashboardController::class, 'add_new_animation'])->middleware(['auth', 'verified'])->name('add_new_animation'); // view
 Route::get('/add_animation', [DashboardController::class, 'store'])->middleware(['auth', 'verified'])->name('add_animation');
-
 Route::get('/category-animations', [DashboardController::class, 'view_category_animations'])->middleware(['auth', 'verified'])->name('category_animations');
+
+
+Route::post('/update-animation-order', [DashboardController::class, 'updateAnimationOrder'])
+    ->middleware(['auth', 'verified'])
+    ->name('update_animation_order');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -16,4 +16,12 @@
     <link href="{{ asset('assets/libs/%40mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet"
         type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.min.css') }}">
+
+    {{-- sortable --}}
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+    {{-- sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 </head>

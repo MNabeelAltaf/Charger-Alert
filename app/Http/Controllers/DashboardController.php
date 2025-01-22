@@ -43,12 +43,14 @@ class DashboardController extends Controller
         if ($category) {
             $categoryName = $category->name;
         } else {
-
             return back()->with('error', 'Category not found.');
         }
 
-        $animations = Resource::where('category_id', $categoryID)->paginate(48);
+        // $animations = Resource::where('category_id', $categoryID)->paginate(160);
 
+        $animations = Resource::where('category_id', $categoryID)
+            ->orderBy('position')
+            ->paginate(160);
 
         return view('view_all_animations', ['animations' => $animations, 'category_name' => $categoryName]);
     }
@@ -66,8 +68,6 @@ class DashboardController extends Controller
                 'category' => 'required',
                 'animation_type' => 'required',
             ]);
-
-
 
 
             $uploadedFile = $request->file('path');
@@ -97,6 +97,23 @@ class DashboardController extends Controller
 
         return view('add_new_animation', compact('category'));
     }
+
+    public function updateAnimationOrder(Request $request)
+    {
+
+        $order = $request->input('order');
+
+        if (!$order || !is_array($order)) {
+            return response()->json(['success' => false, 'message' => 'Invalid order data.']);
+        }
+
+        foreach ($order as $position => $id) {
+            Resource::where('id', $id)->update(['position' => $position]);
+        }
+
+        return response()->json(['success' => true, 'message' => 'Order updated successfully.', 'order' => $order]);
+    }
+
 
 
     public function view_anim(Request $request)
@@ -264,7 +281,7 @@ class DashboardController extends Controller
         Category::create([
             'name' => $category_name,
             'thumb' => $thumbnailPath ?  $thumbnailPath : null,
-            'visibility'=>0
+            'visibility' => 0
         ]);
         return back()->with('success', 'Category has been added');
     }

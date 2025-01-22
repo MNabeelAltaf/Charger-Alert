@@ -26,12 +26,10 @@
                 <h3 class="md:text-[30px] text-[26px] font-semibold text-center">{{ $category_name }} <br> Animations
                 </h3>
             </div>
-            <!--end grid-->
+
             {{-- all animations --}}
-            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
 
-                {{-- {{ dd($animations) }} --}}
-
+            {{-- <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
                 @foreach ($animations as $anim)
                     <div
                         class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 h-80 flex flex-col">
@@ -56,8 +54,38 @@
                         </a>
                     </div>
                 @endforeach
+
+
+            </div> --}}
+
+            <div id="animation-grid"
+                class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
+                @foreach ($animations as $anim)
+                    <div data-id="{{ $anim->id }}"
+                        class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 h-80 flex flex-col">
+
+                        <a href="{{ route('view_animation', ['animation_id' => $anim->id]) }}">
+
+                            <div class="relative flex-grow overflow-hidden h-4/5">
+
+                                <img src="{{ url('storage') . '/' . $anim->thumbnail }}"
+                                    class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full w-full object-cover"
+                                    alt="">
+                            </div>
+
+
+                            <div class="flex-none h-1/5 mt-2">
+                                <div class="my-3">
+                                    <a href="#" class="font-semibold hover:text-violet-600">
+                                        {{ $anim->name }}
+                                    </a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
-            <!--end grid-->
+
             <br>
 
             @if (!$animations->isEmpty())
@@ -95,6 +123,66 @@
     <!-- Back to top -->
 
     @include('components.JSFiles')
+
+
+    {{-- dragable --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const grid = document.getElementById("animation-grid");
+
+            const sortable = new Sortable(grid, {
+                animation: 150,
+                onEnd: function(evt) {
+                    const items = Array.from(grid.children);
+                    const order = items.map((item) => item.getAttribute("data-id"));
+
+                    console.log(order);
+
+
+                    fetch('{{ route('update_animation_order') }}', {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                            },
+                            body: JSON.stringify({
+                                order: order
+                            }),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+
+                            console.log(data);
+
+
+                            if (data.success) {
+                                Swal.fire({
+                                    title: "Success!",
+                                    icon: "success",
+                                    draggable: true
+                                });
+                            } else {
+                                console.error("Failed to update order:", data.message);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Error in order updation",
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Fail",
+                                text: "Fail to update order",
+                            });
+                        });
+                },
+            });
+        });
+    </script>
+
 
 </body>
 

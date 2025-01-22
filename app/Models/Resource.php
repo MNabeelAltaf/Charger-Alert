@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Resource extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'path', 'thumbnail', 'category_id', 'animation_type'];
+    protected $fillable = ['name', 'path', 'thumbnail', 'category_id','position', 'animation_type'];
 
     public $timestamps = true;
 
