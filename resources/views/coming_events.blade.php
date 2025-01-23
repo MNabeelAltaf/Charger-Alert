@@ -21,7 +21,12 @@
 
 
     @php
-        $existingPriorities = array_column($priority_added_category, 'priority_value');
+        $existingPriorities = array_column($priority_added_category, 'priority_value'); // id's of added items
+        $availablePriorities = array_filter(range(1, $all_categories_count), function ($number) use (
+            $existingPriorities,
+        ) {
+            return !in_array($number, $existingPriorities);
+        });
     @endphp
     <!-- End Navbar -->
 
@@ -45,7 +50,7 @@
                                 <div class="space-y-5">
 
                                     <div class="grid grid-cols-2 gap-4">
-                                        <!-- Priority Dropdown -->
+                                        <!-- Category Dropdown -->
                                         <div>
                                             <label class="form-label font-medium">Category<span
                                                     class="text-red-600">*</span></label>
@@ -53,42 +58,30 @@
                                                 class="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-2">
 
                                                 <option value="" disabled selected>Select a Category</option>
-                                                <!-- Placeholder option -->
-
                                                 @foreach ($filtered_categories as $index => $category)
-                                                    @if ($index != 0)
-                                                        <!-- Exclude index 0 -->
-                                                        <option value="{{ $category->id }}">{{ $category->name }}
-                                                        </option>
-                                                    @endif
+                                                    <option value="{{ $category->id }}">{{ $category->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
-
                                         </div>
 
 
-                                        <!-- Category Dropdown -->
+                                        <!-- Priority Dropdown -->
                                         <div>
                                             <label class="form-label font-medium">Set Priority<span
                                                     class="text-red-600">*</span></label>
 
                                             <select name="priority_value" required
                                                 class="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-2">
-
                                                 <option value="" disabled selected>Select Priority of category
                                                 </option>
-
                                                 @if (!empty($filtered_categories))
-                                                    @foreach ($filtered_categories as $index => $priority)
-                                                        @if ($index != 0 && !in_array($index, $existingPriorities))
-                                                            <option value="{{ $index }}">{{ $index }}
-                                                            </option>
-                                                        @endif
+                                                    @foreach ($availablePriorities as $priority)
+                                                        <option value="{{ $priority }}">{{ $priority }}
+                                                        </option>
                                                     @endforeach
                                                 @endif
-
                                             </select>
-
                                         </div>
                                     </div>
 
@@ -109,59 +102,63 @@
 
                 @if ($priority_added_category && count($priority_added_category))
                     <div class="mx-6">
-                        <h3 class="md:text-[30px] text-[26px] font-semibold text-center mb-4">Priority-wise Categories</h3>
+                        <h3 class="md:text-[30px] text-[26px] font-semibold text-center mb-4">Priority-wise Categories
+                        </h3>
                         <br>
-
                         @php
                             usort($priority_added_category, function ($a, $b) {
                                 return $a['priority_value'] <=> $b['priority_value'];
                             });
                         @endphp
 
-                        <div class="flex flex-col items-start space-y-8"> <!-- Container for vertical alignment -->
-                            @foreach ($priority_added_category as $category_names)
-                                @php
-                                    $randomColor = sprintf('#%06X', mt_rand(0, 0xffffff));
-                                @endphp
-                                <br><br>
+                        <div class="flex flex-col items-start space-y-8">
 
-                                <div class="flex items-center space-x-2">
+                            <table class="table-auto border-collapse border border-gray-300 w-full">
+                                <thead>
+                                    <tr class="bg-gray-200">
+                                        <th class="border border-gray-300 px-4 py-2 text-left">Priority Value</th>
+                                        <th class="border border-gray-300 px-4 py-2 text-left">Category Name</th>
+                                        <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
 
-                                    &nbsp;
-                                    &nbsp;
+                                    @foreach ($priority_added_category as $category_names)
+                                        @php
+                                            $randomColor = sprintf('#%06X', mt_rand(0, 0xffffff));
+                                        @endphp
+                                        <br><br>
+                                        <tr>
+                                            <td class="border px-4 py-2 text-gray-600">
+                                                #{{ $category_names['priority_value'] }}
+                                            </td>
 
-                                    <span class="text-gray-600 ml-2">#{{ $category_names['priority_value'] }}</span>
+                                            <td class="border px-4 py-2">
+                                                <a href="{{ route('category_animations', ['category_id' => $category_names['id']]) }}"
+                                                    class="btn rounded-lg transition duration-300 ease-in-out hover:bg-opacity-80"
+                                                    style="background-color: {{ $randomColor }}; border-color: {{ $randomColor }}; color: white;"
+                                                    title="{{ $category_names['category_name'] }}">
+                                                    {{ $category_names['category_name'] }}
+                                                </a>
+                                            </td>
 
-                                    &nbsp;
-                                    &nbsp;
-
-                                    <a href="{{ route('category_animations', ['category_id' => $category_names['id']]) }}"
-                                        class="btn rounded-lg transition duration-300 ease-in-out hover:bg-opacity-80"
-                                        style="background-color: {{ $randomColor }}; border-color: {{ $randomColor }}; color: white;"
-                                        title="{{ $category_names['category_name'] }}">
-                                        {{ $category_names['category_name'] }}
-                                    </a>
-                                    &nbsp;
-                                    &nbsp;
-
-                                    <span
-                                        class="flex items-center justify-center w-6 h-6 bg-red-600 border-2 text-white">
-                                        <form
-                                            action="{{ route('deletePriority', ['category_id' => $category_names['id']]) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Are you sure you want to reset priority?');">
-                                            @csrf
-                                            <button type="submit" class="flex items-center justify-center">
-                                                <i class="mdi mdi-delete" aria-hidden="true"></i>
-                                            </button>
-                                        </form>
-                                    </span>
-                                </div>
-                            @endforeach
+                                            <td class="border  px-4 py-2">
+                                                <form
+                                                    action="{{ route('deletePriority', ['category_id' => $category_names['id']]) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Are you sure you want to reset priority?');">
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="flex items-center justify-center bg-red-600 text-white rounded border-2 border-red-500 px-4 py-2">
+                                                        <p>Reset Priority</p>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-
-
-
 
                     </div>
                 @else

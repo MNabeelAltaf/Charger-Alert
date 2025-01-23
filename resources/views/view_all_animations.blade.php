@@ -136,7 +136,6 @@
                     const items = Array.from(grid.children);
                     const order = items.map((item) => item.getAttribute("data-id"));
 
-                    console.log(order);
 
 
                     fetch('{{ route('update_animation_order') }}', {

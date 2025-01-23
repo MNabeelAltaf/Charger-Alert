@@ -30,10 +30,10 @@ class EventsController extends Controller
                 }
             }
             return true;
-        });
+        })->values();
 
 
-        return view('coming_events', ['priority_added_category' => $added_category, 'filtered_categories' => $filtered_categories]);
+        return view('coming_events', ['priority_added_category' => $added_category, 'filtered_categories' => $filtered_categories,'all_categories_count'=>$categories->count()]);
     }
 
 
@@ -62,15 +62,13 @@ class EventsController extends Controller
 
         $category_data = Category::find($category_id);
 
-        if (!$category_data){
-            return redirect()->back()->with('error','Error Occurred!');
+        if (!$category_data) {
+            return redirect()->back()->with('error', 'Error Occurred!');
         }
 
         $category_data->priority = $priority_value;
         $category_data->save();
 
-        return redirect()->back()->with('success','Priority Set Successfully');
-
+        return redirect()->back()->with('success', 'Priority Set Successfully');
     }
-
 }

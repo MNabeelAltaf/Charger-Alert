@@ -84,14 +84,12 @@ class ResourceController extends Controller
             ];
         });
 
-        // $groupedResources = $resourcesWithDetails->groupBy('category');
-
 
         $groupedResources = $resourcesWithDetails
-        ->groupBy('category') // Group by category name (keeps category names as keys)
+        ->groupBy('category')
         ->map(function ($group) {
-            return $group->sortBy('order')->values(); // Sort within each group and reset inner keys
-        }); // Do not reset the top-level keys
+            return $group->sortBy('order')->values();
+        });
 
 
 

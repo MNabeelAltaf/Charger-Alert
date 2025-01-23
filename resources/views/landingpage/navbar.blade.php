@@ -4,10 +4,8 @@
         <a class="logo ps-0" href="{{ route('homepage') }}">
             <img src="{{ asset('assets/images/icon.png') }}" class="inline-block sm:hidden" alt="">
             <div class="sm:block hidden">
-                <img src="{{ asset('assets/images/icon.png') }}" class="inline-block dark:hidden h-7"
-                    alt="">
-                <img src="{{ asset('assets/images/icon.png') }}" class="hidden dark:inline-block h-7"
-                    alt="">
+                <img src="{{ asset('assets/images/icon.png') }}" class="inline-block dark:hidden h-7" alt="">
+                <img src="{{ asset('assets/images/icon.png') }}" class="hidden dark:inline-block h-7" alt="">
             </div>
         </a>
         <!-- End Logo container-->
@@ -30,7 +28,7 @@
         <ul class="buy-button list-none mb-0">
 
             <li class="inline-block ps-1  mb-0 ">
-                <a   href="#download_btn"
+                <a href="#download_btn"
                     class="p-3 inline-block rounded-full bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white text-center px-6 py-3">
                     Download App
                 </a>
@@ -55,3 +53,23 @@
         </div>
     </div>
 </nav>
+
+<style>
+    @media screen and (max-width: 690px) {
+        .logo img {
+            width: 2rem
+        }
+    }
+</style>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('isToggle').classList.toggle('open');
+        var isOpen = document.getElementById('navigation')
+        if (isOpen.style.display === "block") {
+            isOpen.style.display = "none";
+        } else {
+            isOpen.style.display = "block";
+        }
+    };
+</script>
