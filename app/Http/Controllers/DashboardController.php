@@ -39,6 +39,7 @@ class DashboardController extends Controller
         $categoryID = $request->category_id;
 
         $category = Category::find($categoryID);
+        $categories = Category::all();
 
         if ($category) {
             $categoryName = $category->name;
@@ -51,9 +52,26 @@ class DashboardController extends Controller
             ->orderBy('position')
             ->paginate(160);
 
-        return view('view_all_animations', ['animations' => $animations, 'category_name' => $categoryName]);
+        return view('view_all_animations', ['animations' => $animations, 'category_name' => $categoryName, 'all_categories' => $categories]);
     }
 
+    public function move_animation(Request $request)
+    {
+
+        $request->validate([
+            'category' => 'required|exists:categories,id',
+            'selected_animations' => 'required|array',
+            'selected_animations.*' => 'exists:resources,id',
+        ]);
+
+        $categoryId = $request->input('category');
+        $selectedAnimations = $request->input('selected_animations');
+
+        Resource::whereIn('id', $selectedAnimations)
+                             ->update(['category_id' => $categoryId]);
+
+        return redirect()->back()->with('success', 'Animations have been moved to the selected category!');
+    }
 
 
     public function create_anim(Request $request)

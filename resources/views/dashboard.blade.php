@@ -49,7 +49,7 @@
 
             <!--end grid-->
             {{-- all categories --}}
-            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
+            <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 mt-10 gap-[30px]">
                 @foreach ($all_categories as $categories)
                     <div
                         class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 h-80 flex flex-col">
@@ -151,7 +151,8 @@
                 </div>
             </div><!--end grid-->
         </div><!--end container-->
-    </section> <!--end section-->
+    </section>
+     <!--end section-->
     <!-- End -->
 
     <!-- Start Footer -->

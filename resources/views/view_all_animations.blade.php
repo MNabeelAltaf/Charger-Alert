@@ -27,64 +27,61 @@
                 </h3>
             </div>
 
-            {{-- all animations --}}
-
-            {{-- <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
-                @foreach ($animations as $anim)
-                    <div
-                        class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 h-80 flex flex-col">
-
-                        <a href="{{ route('view_animation', ['animation_id' => $anim->id]) }}">
-
-                            <div class="relative flex-grow overflow-hidden h-4/5">
-
-                                <img src="{{ url('storage') . '/' . $anim->thumbnail }}"
-                                    class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full w-full object-cover"
-                                    alt="">
-                            </div>
-
-
-                            <div class="flex-none h-1/5 mt-2">
-                                <div class="my-3">
-                                    <a href="#" class="font-semibold hover:text-violet-600">
-                                        {{ $anim->name }}
-                                    </a>
-                                </div>
-                            </div>
-                        </a>
+            <form action="{{ route('move_animations') }}" id="moveAnimationsForm" method="POST">
+                @csrf
+                {{-- Move Category Code --}}
+                <div class="flex flex-row justify-end items-end">
+                    <div>
+                        <select name="category" required
+                            class="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-2">
+                            <option value="" disabled selected>Select a Category</option>
+                            @foreach ($all_categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                @endforeach
-
-
-            </div> --}}
-
-            <div id="animation-grid"
-                class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
-                @foreach ($animations as $anim)
-                    <div data-id="{{ $anim->id }}"
-                        class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 h-80 flex flex-col">
-
-                        <a href="{{ route('view_animation', ['animation_id' => $anim->id]) }}">
-
-                            <div class="relative flex-grow overflow-hidden h-4/5">
-
-                                <img src="{{ url('storage') . '/' . $anim->thumbnail }}"
-                                    class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full w-full object-cover"
-                                    alt="">
-                            </div>
-
-
-                            <div class="flex-none h-1/5 mt-2">
-                                <div class="my-3">
-                                    <a href="#" class="font-semibold hover:text-violet-600">
-                                        {{ $anim->name }}
-                                    </a>
-                                </div>
-                            </div>
-                        </a>
+                    &nbsp;
+                    &nbsp;
+                    <div>
+                        <input type="submit" id="submit" name=""
+                            class="btn bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full "
+                            value="Move">
                     </div>
-                @endforeach
-            </div>
+                </div>
+
+                {{-- All Animations --}}
+                <div id="animation-grid"
+                    class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-[30px]">
+                    @foreach ($animations as $anim)
+                        <div data-id="{{ $anim->id }}"
+                            class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all duration-500 h-80 flex flex-col">
+
+                            <div class="mt-2">
+                                <input type="checkbox" name="selected_animations[]" value="{{ $anim->id }}"
+                                    class="checkbox ml-2">
+                            </div>
+
+                            <!-- Image and Name Section (Clickable Area) -->
+                            <a href="{{ route('view_animation', ['animation_id' => $anim->id]) }}">
+                                <div class="relative flex-grow overflow-hidden h-4/5">
+                                    <img src="{{ url('storage') . '/' . $anim->thumbnail }}"
+                                        class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500 h-full w-full object-cover"
+                                        alt="">
+                                </div>
+
+                                <div class="flex-none h-1/5 mt-2">
+                                    <div class="my-3">
+                                        <a href="#"
+                                            class="font-semibold hover:text-violet-600">{{ $anim->name }}</a>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    @endforeach
+                </div>
+            </form>
+
 
             <br>
 
@@ -95,10 +92,6 @@
                     </div>
                 </div>
             @endif
-
-
-
-
 
             <br>
             <br>
@@ -155,11 +148,11 @@
 
 
                             if (data.success) {
-                                Swal.fire({
-                                    title: "Success!",
-                                    icon: "success",
-                                    draggable: true
-                                });
+                                // Swal.fire({
+                                //     title: "Success!",
+                                //     icon: "success",
+                                //     draggable: true
+                                // });
                             } else {
                                 console.error("Failed to update order:", data.message);
                                 Swal.fire({
@@ -179,8 +172,24 @@
                         });
                 },
             });
+
+
+            // move animation
+            const checkboxes = document.querySelectorAll('.checkbox');
+            const selectAllCheckbox = document.querySelector('#select-all');
+
+            if (selectAllCheckbox) {
+                selectAllCheckbox.addEventListener('change', function() {
+                    checkboxes.forEach((checkbox) => {
+                        checkbox.checked = selectAllCheckbox.checked;
+                    });
+                });
+            }
+
+
         });
     </script>
+
 
 
 </body>
