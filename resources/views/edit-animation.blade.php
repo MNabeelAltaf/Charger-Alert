@@ -51,7 +51,7 @@
                                 @csrf
 
                                 <div class="space-y-5">
-                                    <div>
+                                    <div style="display: none;">
                                         <label class="form-label font-medium">Title<span
                                                 class="text-red-600">*</span></label>
                                         <input type="text"
