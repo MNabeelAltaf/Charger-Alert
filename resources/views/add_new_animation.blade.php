@@ -39,12 +39,12 @@
                                 class="py-6">
                                 @csrf
                                 <div class="space-y-5">
-                                    <div>
+                                    <div style="display: none">
                                         <label class="form-label font-medium">Title<span
-                                                class="text-red-600">*</span></label>
+                                                class="text-gray-600"> (optional)</span></label>
                                         <input type="text"
                                             class="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-2 "
-                                            placeholder="Name:" id="name" name="name" required="">
+                                            placeholder="Name:" id="name" name="name" >
                                     </div>
                                     <br>
                                     <div>

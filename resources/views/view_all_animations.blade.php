@@ -70,9 +70,9 @@
                                 </div>
 
                                 <div class="flex-none h-1/5 mt-2">
-                                    <div class="my-3">
-                                        <a href="#"
-                                            class="font-semibold hover:text-violet-600">{{ $anim->name }}</a>
+                                    <div class="my-5">
+                                        {{-- <a href="#"
+                                            class="font-semibold hover:text-violet-600">{{ $anim->name }}</a> --}}
                                     </div>
                                 </div>
                             </a>

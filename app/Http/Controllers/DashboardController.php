@@ -79,8 +79,7 @@ class DashboardController extends Controller
 
         try {
             $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'path' => 'required|file|mimetypes:video/*,application/json,text/plain|max:3072',
+                'path' => 'required|file|mimetypes:video/*,application/json,text/plain|max:50720',
                 'thumbnail' => 'required|file|mimes:jpg,jpeg,webp,png|max:10240',
                 'category' => 'required',
                 'animation_type' => 'required',
@@ -93,11 +92,12 @@ class DashboardController extends Controller
 
             $thumbnailPath = $request->file('thumbnail')->store('thumbnail', 'public');
             Resource::create([
-                'name' => $validated['name'],
+                'name' => $validated['name'] ?? $validated['category'].'_'.uniqid(),
                 'path' => $filePath,
                 'thumbnail' => $thumbnailPath,
                 'category_id' => $validated['category'],
                 'animation_type' => $validated['animation_type'],
+                'position' => 0
             ]);
 
             return back()->with('success', 'Successfully created');
